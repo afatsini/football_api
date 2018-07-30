@@ -9,7 +9,8 @@ defmodule FootballApiWeb.Endpoint do
 
   plug(Plug.Logger)
 
-  plug(Plug.Parsers,
+  plug(
+    Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
     pass: ["*/*"],
     json_decoder: Poison
