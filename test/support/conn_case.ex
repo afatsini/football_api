@@ -15,6 +15,8 @@ defmodule FootballApiWeb.ConnCase do
 
   use ExUnit.CaseTemplate
 
+  alias Phoenix.ConnTest
+
   using do
     quote do
       # Import conveniences for testing with connections
@@ -27,6 +29,6 @@ defmodule FootballApiWeb.ConnCase do
   end
 
   setup tags do
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
+    {:ok, conn: ConnTest.build_conn()}
   end
 end
