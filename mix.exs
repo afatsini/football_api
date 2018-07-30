@@ -35,7 +35,8 @@ defmodule FootballApi.Mixfile do
     [
       {:phoenix, "~> 1.3.1"},
       {:phoenix_ecto, "~> 3.2"},
-      {:cowboy, "~> 1.0"}
+      {:cowboy, "~> 1.0"},
+      {:dialyxir, "~> 0.5", only: [:dev], runtime: false}
     ]
   end
 
