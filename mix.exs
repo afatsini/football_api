@@ -10,7 +10,9 @@ defmodule FootballApi.Mixfile do
       compilers: [:phoenix] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: ["coveralls.json": :test]
     ]
   end
 
@@ -37,7 +39,8 @@ defmodule FootballApi.Mixfile do
       {:phoenix_ecto, "~> 3.2"},
       {:cowboy, "~> 1.0"},
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
-      {:credo, "~> 0.9", only: [:dev, :test], runtime: false}
+      {:credo, "~> 0.9", only: [:dev, :test], runtime: false},
+      {:excoveralls, "~> 0.9", only: :test}
     ]
   end
 
