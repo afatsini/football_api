@@ -9,7 +9,7 @@ defmodule FootballApi.Application do
     # Define workers and child supervisors to be supervised
     children = [
       # Start the endpoint when the application starts
-      supervisor(FootballApiWeb.Endpoint, []),
+      supervisor(FootballApiWeb.Endpoint, [])
       # Start your own worker by calling: FootballApi.Worker.start_link(arg1, arg2, arg3)
       # worker(FootballApi.Worker, [arg1, arg2, arg3]),
     ]

@@ -7,17 +7,18 @@ defmodule FootballApiWeb.Endpoint do
     plug(Phoenix.CodeReloader)
   end
 
-  plug Plug.Logger
+  plug(Plug.Logger)
 
-  plug Plug.Parsers,
+  plug(Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
     pass: ["*/*"],
     json_decoder: Poison
+  )
 
-  plug Plug.MethodOverride
-  plug Plug.Head
+  plug(Plug.MethodOverride)
+  plug(Plug.Head)
 
-  plug FootballApiWeb.Router
+  plug(FootballApiWeb.Router)
 
   def init(_key, config) do
     if config[:load_from_system_env] do
