@@ -5,18 +5,6 @@
 # is restricted to this project.
 use Mix.Config
 
-# General application configuration
-config :football_api,
-  ecto_repos: [FootballApi.Repo]
-
-# Configures the endpoint
-config :football_api, FootballApiWeb.Endpoint,
-  url: [host: "localhost"],
-  secret_key_base: "lxL/H9XHjGl3dvrfOxA4FDEBbmykQZLHmgqqYvJl63WKKNejCl3D79L1EWtXfeGa",
-  render_errors: [view: FootballApiWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: FootballApi.PubSub,
-           adapter: Phoenix.PubSub.PG2]
-
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

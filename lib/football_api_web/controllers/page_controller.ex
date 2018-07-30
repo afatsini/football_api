@@ -2,6 +2,6 @@ defmodule FootballApiWeb.PageController do
   use FootballApiWeb, :controller
 
   def index(conn, _params) do
-    render conn, "index.html"
+    json(conn, %{"ping" => "pong"})
   end
 end

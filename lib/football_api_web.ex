@@ -22,7 +22,6 @@ defmodule FootballApiWeb do
       use Phoenix.Controller, namespace: FootballApiWeb
       import Plug.Conn
       import FootballApiWeb.Router.Helpers
-      import FootballApiWeb.Gettext
     end
   end
 
@@ -39,7 +38,6 @@ defmodule FootballApiWeb do
 
       import FootballApiWeb.Router.Helpers
       import FootballApiWeb.ErrorHelpers
-      import FootballApiWeb.Gettext
     end
   end
 
@@ -48,13 +46,6 @@ defmodule FootballApiWeb do
       use Phoenix.Router
       import Plug.Conn
       import Phoenix.Controller
-    end
-  end
-
-  def channel do
-    quote do
-      use Phoenix.Channel
-      import FootballApiWeb.Gettext
     end
   end
 

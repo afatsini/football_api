@@ -8,12 +8,3 @@ config :football_api, FootballApiWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
-
-# Configure your database
-config :football_api, FootballApi.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "football_api_test",
-  hostname: "localhost",
-  pool: Ecto.Adapters.SQL.Sandbox
