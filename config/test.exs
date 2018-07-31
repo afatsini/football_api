@@ -8,3 +8,7 @@ config :football_api, FootballApiWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :football_api, FootballApi.DataServer,
+  data_path: "./test/fixtures/data.csv",
+  table_name: :test_data
