@@ -1,0 +1,8 @@
+/_build
+/deps
+/cover
+
+# Generated on crash by the VM
+erl_crash.dump
+
+/config/*.secret.exs
