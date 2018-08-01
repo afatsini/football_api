@@ -6,8 +6,12 @@ defmodule FootballApiWeb.Router do
   end
 
   scope "/", FootballApiWeb do
+    get("/", PageController, :index)
+  end
+
+  scope "/v1", FootballApiWeb.V1 do
     pipe_through(:api)
 
-    get("/", PageController, :index)
+    get("/results", ResultsController, :index)
   end
 end
