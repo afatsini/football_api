@@ -33,8 +33,27 @@ defmodule FootballApi.DataServer.DataServerTest do
 
     test "filter with only one criteria returns all matches with the given criteria only" do
       assert DataServer.get_by(div: "SP1")
-             |> Enum.map(fn {_key, entry} -> entry["Div"] end)
+             |> Enum.map(fn entry -> entry["Div"] end)
              |> Enum.uniq() == ["SP1"]
+    end
+
+    test "check the format of the entries" do
+      entry = DataServer.get_by(div: "SP1") |> List.last()
+
+      assert %{
+               "" => _,
+               "AwayTeam" => _,
+               "Date" => _,
+               "Div" => _,
+               "FTAG" => _,
+               "FTHG" => _,
+               "FTR" => _,
+               "HTAG" => _,
+               "HTHG" => _,
+               "HTR" => _,
+               "HomeTeam" => _,
+               "Season" => _
+             } = entry
     end
   end
 end
