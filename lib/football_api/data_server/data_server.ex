@@ -77,7 +77,9 @@ defmodule FootballApi.DataServer do
     |> Path.expand(__DIR__)
     |> File.stream!()
     |> CSV.decode!(headers: true)
-    |> Enum.map(fn line -> line |> Enum.into(%{}) end)
+    |> Enum.map(fn line ->
+      line |> Enum.into(%{}, fn {key, value} -> {String.to_atom(key), value} end)
+    end)
   end
 
   defp initialize_ets_table do
@@ -95,6 +97,6 @@ defmodule FootballApi.DataServer do
   end
 
   defp build_key(entry) do
-    {entry["Div"], entry["Season"]}
+    {entry[:Div], entry[:Season]}
   end
 end
