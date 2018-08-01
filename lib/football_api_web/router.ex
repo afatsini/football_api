@@ -2,7 +2,7 @@ defmodule FootballApiWeb.Router do
   use FootballApiWeb, :router
 
   pipeline :api do
-    plug(:accepts, ["json"])
+    plug(:accepts, ["json-api"])
   end
 
   scope "/", FootballApiWeb do
