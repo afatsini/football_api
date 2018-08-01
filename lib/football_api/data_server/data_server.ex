@@ -29,25 +29,23 @@ defmodule FootballApi.DataServer do
    ## Examples
 
       iex> GenServer.get_by(div: "SP1", season: "201617")
-      [{{"SP1", "201617"},
-  %{
-   "" => "1",
-   "AwayTeam" => "Eibar",
-   "Date" => "19/08/16",
-   "Div" => "SP1",
-   "FTAG" => "1",
-   "FTHG" => "2",
-   "FTR" => "H",
-   "HTAG" => "0",
-   "HTHG" => "0",
-   "HTR" => "D",
-   "HomeTeam" => "La Coruna",
-   "Season" => "201617"
-  }},
-  {{"SP1", ...}, %{...}},
-  {{...}, ...},
-  {...},
-  ...]
+      [%{
+       "" => "1",
+       "AwayTeam" => "Eibar",
+       "Date" => "19/08/16",
+       "Div" => "SP1",
+       "FTAG" => "1",
+       "FTHG" => "2",
+       "FTR" => "H",
+       "HTAG" => "0",
+       "HTHG" => "0",
+       "HTR" => "D",
+       "HomeTeam" => "La Coruna",
+       "Season" => "201617"
+      },
+      %{...},
+      %{...},
+      ...]
   """
   def get_by(query \\ []) do
     GenServer.call(__MODULE__, {:get_by, query})
@@ -67,7 +65,10 @@ defmodule FootballApi.DataServer do
   end
 
   def handle_call({:get_by, query}, _from, state) do
-    result = :ets.match_object(@table_name, {{query[:div] || :_, query[:season] || :_}, :_})
+    result =
+      :ets.match(@table_name, {{query[:div] || :_, query[:season] || :_}, :"$1"})
+      |> List.flatten()
+
     {:reply, result, state}
   end
 
