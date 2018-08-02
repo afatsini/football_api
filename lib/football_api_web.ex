@@ -22,6 +22,7 @@ defmodule FootballApiWeb do
       use Phoenix.Controller, namespace: FootballApiWeb
       import Plug.Conn
       import FootballApiWeb.Router.Helpers
+      import FootballApiWeb.Controller
     end
   end
 
