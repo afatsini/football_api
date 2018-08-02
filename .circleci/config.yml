@@ -29,7 +29,7 @@ jobs:
           command: MIX_ENV=prod mix do deps.get, compile --warnings-as-errors
 
       - save_cache:
-          key: v1-mix-deps-{{ .Branch }}
+          key: v1-mix-deps-{{ .Branch }}-{{ epoch }}
           paths:
             - deps
 
@@ -51,7 +51,7 @@ jobs:
           command:  mix dialyzer --halt-exit-status || exit 1
 
       - save_cache:
-          key: v1-build-{{ .Branch }}
+          key: v1-build-{{ .Branch }}-{{ epoch }}
           paths:
             - _build
 
