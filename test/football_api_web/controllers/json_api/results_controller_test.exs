@@ -1,8 +1,9 @@
-defmodule FootballApiWeb.V1.ResultsControllerTest do
+defmodule FootballApiWeb.JsonApi.ResultsControllerTest do
   @moduledoc """
     Controller test is used as integration test, going though all
     the real objects
   """
+
   use FootballApiWeb.ConnCase
 
   describe "index/2" do
