@@ -6,6 +6,6 @@ defmodule FootballApiWeb.V1.ResultsController do
 
   def index(conn, _params) do
     results = DataServer.get_by([])
-    json(conn, results)
+    render(conn, "index.json-api", data: results)
   end
 end
