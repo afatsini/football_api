@@ -1,4 +1,4 @@
-message Result {
+message Match {
   required string Div = 2;
   required string Season = 3;
   required string Date = 4;

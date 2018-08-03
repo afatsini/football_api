@@ -1,4 +1,4 @@
-defmodule FootballApiWeb.V1.JsonApi.ResultsController do
+defmodule FootballApiWeb.V1.JsonApi.MatchController do
   @moduledoc """
     Result controller in charge of receiving the filter,
     passing it to the business layer and render the results
@@ -6,13 +6,13 @@ defmodule FootballApiWeb.V1.JsonApi.ResultsController do
 
   use FootballApiWeb, :controller
 
-  alias FootballApi.DataServer
-  alias FootballApi.Schemas.GetResults
+  alias FootballApi.Schemas.Match
+  alias FootballApiWeb.Schemas.GetMatches
 
   def index(conn, params) do
-    with {:ok, schema} <- GetResults.validate_params(params),
+    with {:ok, schema} <- GetMatches.validate_params(params),
          query <- Map.from_struct(schema),
-         results <- DataServer.get_by(query) do
+         results <- Match.get_by(query) do
       render(conn, "index.json-api", data: results)
     else
       error -> error

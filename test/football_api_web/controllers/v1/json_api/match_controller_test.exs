@@ -1,4 +1,4 @@
-defmodule FootballApiWeb.V1.JsonApi.ResultsControllerTest do
+defmodule FootballApiWeb.V1.JsonApi.MatchControllerTest do
   @moduledoc """
     Controller test is used as integration test, going though all
     the real objects
@@ -10,7 +10,7 @@ defmodule FootballApiWeb.V1.JsonApi.ResultsControllerTest do
     test "return OK - 200 with json API result", %{conn: conn} do
       response =
         conn
-        |> get(results_path(conn, :index))
+        |> get(match_path(conn, :index))
         |> json_response(200)
 
       %{
@@ -30,7 +30,7 @@ defmodule FootballApiWeb.V1.JsonApi.ResultsControllerTest do
               "Season" => _
             },
             "id" => _,
-            "type" => "results"
+            "type" => "match"
           }
           | _
         ],
@@ -44,7 +44,7 @@ defmodule FootballApiWeb.V1.JsonApi.ResultsControllerTest do
 
     response =
       conn
-      |> get(results_path(conn, :index, %{div: value}))
+      |> get(match_path(conn, :index, %{div: value}))
       |> json_response(200)
 
     [div_from_result] =
@@ -58,7 +58,7 @@ defmodule FootballApiWeb.V1.JsonApi.ResultsControllerTest do
 
     response =
       conn
-      |> get(results_path(conn, :index, %{season: value}))
+      |> get(match_path(conn, :index, %{season: value}))
       |> json_response(200)
 
     [season_filter] =

@@ -1,7 +1,7 @@
-defmodule FootballApiWeb.V1.Protobuffer.ResultsControllerTest do
+defmodule FootballApiWeb.V1.Protobuffer.MatchControllerTest do
   use FootballApiWeb.ConnCase
 
-  alias FootballApi.Protobuf.Protobuf
+  alias FootballApi.Protobuf.Match
   alias FootballApi.Protobuf.ProtoParams
 
   describe "GET index/2" do
@@ -14,7 +14,7 @@ defmodule FootballApiWeb.V1.Protobuffer.ResultsControllerTest do
 
       assert Enum.member?(response.resp_headers, {"content-type", "application/x-protobuf"})
 
-      decoded_body = Protobuf.decode(response.resp_body)
+      decoded_body = Match.decode(response.resp_body)
 
       assert %{
                AwayTeam: _,
@@ -46,7 +46,7 @@ defmodule FootballApiWeb.V1.Protobuffer.ResultsControllerTest do
 
       assert Enum.member?(response.resp_headers, {"content-type", "application/x-protobuf"})
 
-      decoded_body = Protobuf.decode(response.resp_body)
+      decoded_body = Match.decode(response.resp_body)
 
       assert %{
                AwayTeam: _,
@@ -72,7 +72,7 @@ defmodule FootballApiWeb.V1.Protobuffer.ResultsControllerTest do
         |> put_req_header("content-type", "application/x-protobuf")
         |> post("/v1/protobuffer/results", encoded_params)
 
-      decoded_body = Protobuf.decode(response.resp_body)
+      decoded_body = Match.decode(response.resp_body)
 
       assert decoded_body[:Div] == "SP1"
       assert decoded_body[:Season] == "201617"

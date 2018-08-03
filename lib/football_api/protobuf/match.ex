@@ -1,15 +1,15 @@
-defmodule FootballApi.Protobuf.Protobuf do
+defmodule FootballApi.Protobuf.Match do
   @moduledoc """
       Allow conversion to protocol buffer format
   """
-  use Protobuf, from: Path.expand("result.proto", __DIR__)
+  use Protobuf, from: Path.expand("match.proto", __DIR__)
 
-  alias FootballApi.Protobuf.Protobuf.Result
+  alias __MODULE__
 
   def encode(entry) when is_map(entry) do
     entry
-    |> Result.new()
-    |> Result.encode()
+    |> Match.Match.new()
+    |> Match.Match.encode()
   end
 
   def encode(entries) when is_list(entries) do
@@ -18,6 +18,6 @@ defmodule FootballApi.Protobuf.Protobuf do
   end
 
   def decode(entry) do
-    entry |> Result.decode() |> Map.from_struct()
+    entry |> Match.Match.decode() |> Map.from_struct()
   end
 end

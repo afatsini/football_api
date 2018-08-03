@@ -1,4 +1,4 @@
-defmodule FootballApiWeb.V1.JsonApi.ResultsView do
+defmodule FootballApiWeb.V1.JsonApi.MatchView do
   use FootballApiWeb, :view
   use JaSerializer.PhoenixView
 

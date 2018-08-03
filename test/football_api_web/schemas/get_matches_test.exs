@@ -1,6 +1,6 @@
-defmodule FootballApiWeb.Schemas.GetResultsTest do
+defmodule FootballApiWeb.Schemas.GetMatchesTest do
   use ExUnit.Case, async: true
-  alias FootballApi.Schemas.GetResults
+  alias FootballApiWeb.Schemas.GetMatches
 
   setup do
     valid_params = [%{div: "SP1", season: "201516"}, %{}, %{div: "SP2"}]
@@ -14,7 +14,7 @@ defmodule FootballApiWeb.Schemas.GetResultsTest do
     test "return ok with valid schema when parameters are valid", %{valid_params: valid_params} do
       valid_params
       |> Enum.each(fn param ->
-        assert {:ok, %{div: _, season: _}} = GetResults.validate_params(param)
+        assert {:ok, %{div: _, season: _}} = GetMatches.validate_params(param)
       end)
     end
 
@@ -23,7 +23,7 @@ defmodule FootballApiWeb.Schemas.GetResultsTest do
     } do
       invalid_params
       |> Enum.each(fn param ->
-        assert {:error, {:bad_request, _}} = GetResults.validate_params(param)
+        assert {:error, {:bad_request, _}} = GetMatches.validate_params(param)
       end)
     end
   end
