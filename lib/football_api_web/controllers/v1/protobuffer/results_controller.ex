@@ -6,7 +6,7 @@ defmodule FootballApiWeb.V1.Protobuffer.ResultsController do
   alias FootballApi.Protobuf
   alias FootballApi.Schemas.GetResults
 
-  def index(conn, params) do
+  def index(conn, _params) do
     {:ok, body_params, _} = read_body(conn)
 
     with decoded_params <- Protobuf.ProtoParams.decode(body_params),
