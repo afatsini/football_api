@@ -66,7 +66,8 @@ defmodule FootballApi.DataServer do
 
   def handle_call({:get_by, query}, _from, state) do
     result =
-      :ets.match(@table_name, {{query[:div] || :_, query[:season] || :_}, :"$1"})
+      @table_name
+      |> :ets.match({{query[:div] || :_, query[:season] || :_}, :"$1"})
       |> List.flatten()
 
     {:reply, result, state}

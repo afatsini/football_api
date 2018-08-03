@@ -1,4 +1,7 @@
 defmodule FootballApi.Schemas.GetResults do
+  @moduledoc """
+  Parameter filter for get results action.
+"""
   use Ecto.Schema
   import Ecto.Changeset
   alias __MODULE__
