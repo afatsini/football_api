@@ -34,7 +34,7 @@ defmodule FootballApiWeb.V1.Protobuffer.ResultsControllerTest do
 
   describe "POST index/2" do
     test "return OK - 200 with json Protocol Buffer result", %{conn: conn} do
-      params = %{div: "SP1", season: "201617"}
+      params = %{}
       encoded_params = params |> ProtoParams.Params.new() |> ProtoParams.Params.encode()
 
       response =
@@ -61,6 +61,21 @@ defmodule FootballApiWeb.V1.Protobuffer.ResultsControllerTest do
                HomeTeam: _,
                Season: _
              } = decoded_body
+    end
+
+    test "return results filtered by div and season param", %{conn: conn} do
+      params = %{div: "SP1", season: "201617"}
+      encoded_params = params |> ProtoParams.Params.new() |> ProtoParams.Params.encode()
+
+      response =
+        conn
+        |> put_req_header("content-type", "application/x-protobuf")
+        |> post("/v1/protobuffer/results", encoded_params)
+
+      decoded_body = Protobuf.decode(response.resp_body)
+
+      assert decoded_body[:Div] == "SP1"
+      assert decoded_body[:Season] == "201617"
     end
   end
 end
