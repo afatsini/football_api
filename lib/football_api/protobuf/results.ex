@@ -1,4 +1,7 @@
 defmodule FootballApi.Protobuf.Results do
+  @moduledoc """
+      Allow conversion to protocol buffer format
+  """
   use Protobuf, from: Path.expand("result.proto", __DIR__)
 
   alias FootballApi.Protobuf.Results.Result

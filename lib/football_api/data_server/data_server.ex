@@ -12,7 +12,7 @@ defmodule FootballApi.DataServer do
   @doc """
   Start the data server
   """
-  def start_link() do
+  def start_link do
     GenServer.start_link(__MODULE__, nil, name: __MODULE__)
   end
 
@@ -73,7 +73,7 @@ defmodule FootballApi.DataServer do
     {:reply, result, state}
   end
 
-  defp data_hash() do
+  defp data_hash do
     "#{File.cwd!()}/#{@data_path}"
     |> Path.expand(__DIR__)
     |> File.stream!()
