@@ -1,4 +1,6 @@
 defmodule FootballApiWeb.FallbackControllerTest do
+  use ExUnit.Case, async: true
+
   alias FootballApiWeb.FallbackController
 
   use FootballApiWeb.ConnCase

@@ -2,6 +2,7 @@ defmodule FootballApi.Schemas.GetResults do
   @moduledoc """
     Parameter filter for get results action.
   """
+
   use Ecto.Schema
   import Ecto.Changeset
   alias __MODULE__
@@ -15,7 +16,7 @@ defmodule FootballApi.Schemas.GetResults do
   end
 
   def validate_params(params) do
-    changeset = GetResults.changeset(params)
+    changeset = changeset(params)
 
     case changeset.valid? do
       true -> {:ok, apply_changes(changeset)}
@@ -23,7 +24,7 @@ defmodule FootballApi.Schemas.GetResults do
     end
   end
 
-  def changeset(params \\ %{}) do
+  defp changeset(params) do
     %GetResults{}
     |> cast(params, @allowed_fields)
     |> validate_required(@required_fields)
