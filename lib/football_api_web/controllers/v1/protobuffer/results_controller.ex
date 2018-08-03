@@ -17,8 +17,6 @@ defmodule FootballApiWeb.V1.Protobuffer.ResultsController do
       conn
       |> put_resp_header("content-type", "application/x-protobuf")
       |> send_resp(200, encoded_results)
-    else
-      error -> error
     end
   end
 end
