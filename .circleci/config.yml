@@ -19,10 +19,12 @@ jobs:
       - restore_cache:
           keys:
             - v1-mix-deps-{{ .Branch }}
+            - v1-mix-deps-
 
       - restore_cache:
           keys:
             - v1-build-{{ .Branch }}
+            - v1-build-
 
       - run:
           name: Fetch dependencies and compile
