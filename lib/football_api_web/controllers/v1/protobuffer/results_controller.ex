@@ -3,15 +3,20 @@ defmodule FootballApiWeb.V1.Protobuffer.ResultsController do
   use FootballApiWeb, :controller
 
   alias FootballApi.DataServer
-  alias FootballApi.Protobuf.Protobuf
+  alias FootballApi.Protobuf
+  alias FootballApi.Schemas.GetResults
 
   def index(conn, _params) do
-    results =
-      DataServer.get_by([])
-      |> Protobuf.encode()
+    {:ok, body_params, _} = read_body(conn)
 
-    conn
-    |> put_resp_header("content-type", "application/x-protobuf")
-    |> send_resp(200, results)
+    with decoded_params <- Protobuf.ProtoParams.decode(body_params),
+         {:ok, schema} <- GetResults.validate_params(decoded_params),
+         query <- Map.from_struct(schema),
+         results <- DataServer.get_by(query),
+         encoded_results <- Protobuf.Protobuf.encode(results) do
+      conn
+      |> put_resp_header("content-type", "application/x-protobuf")
+      |> send_resp(200, encoded_results)
+    end
   end
 end

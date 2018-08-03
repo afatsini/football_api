@@ -23,5 +23,6 @@ defmodule FootballApiWeb.Router do
     pipe_through(:protobuffer)
 
     get("/results", ResultsController, :index)
+    post("/results", ResultsController, :index)
   end
 end

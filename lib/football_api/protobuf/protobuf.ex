@@ -18,6 +18,6 @@ defmodule FootballApi.Protobuf.Protobuf do
   end
 
   def decode(entry) do
-    Result.decode(entry)
+    entry |> Result.decode() |> Map.from_struct()
   end
 end
