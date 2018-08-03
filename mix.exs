@@ -22,7 +22,7 @@ defmodule FootballApi.Mixfile do
   def application do
     [
       mod: {FootballApi.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :exprotobuf]
     ]
   end
 
@@ -42,7 +42,8 @@ defmodule FootballApi.Mixfile do
       {:ja_serializer, "~> 0.13.0"},
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
       {:credo, "~> 0.9", only: [:dev, :test], runtime: false},
-      {:excoveralls, "~> 0.9", only: :test}
+      {:excoveralls, "~> 0.9", only: :test},
+      {:exprotobuf, "~> 1.2.9"}
     ]
   end
 

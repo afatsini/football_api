@@ -17,7 +17,8 @@ config :football_api, FootballApi.DataServer,
 config :phoenix, :format_encoders, "json-api": Poison
 
 config :plug, :mimes, %{
-  "application/vnd.api+json" => ["json-api"]
+  "application/vnd.api+json" => ["json-api"],
+  "application/x-protobuf" => ["x-protobuf"]
 }
 
 # Import environment specific config. This must remain at the bottom
