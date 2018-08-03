@@ -5,7 +5,7 @@ defmodule FootballApiWeb.V1.Protobuffer.ResultsController do
   alias FootballApi.DataServer
   alias FootballApi.Protobuf.Protobuf
 
-  def index(conn, params) do
+  def index(conn, _params) do
     results =
       DataServer.get_by([])
       |> Protobuf.encode()

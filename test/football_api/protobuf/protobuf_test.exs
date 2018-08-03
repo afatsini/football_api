@@ -20,54 +20,58 @@ defmodule FootballApi.Protobuf.ProtobufTest do
       Season: "201516"
     }
 
-    %{result_map: result_map}
+    decoded_protobuf = %Result{
+      AwayTeam: "Mallorca",
+      Date: "22/08/15",
+      Div: "SP2",
+      FTAG: "0",
+      FTHG: "2",
+      FTR: "H",
+      HTAG: "0",
+      HTHG: "1",
+      HTR: "H",
+      HomeTeam: "Alcorcon",
+      Season: "201516"
+    }
+
+    encoded_protobuf = result_map |> Result.new() |> Result.encode()
+
+    %{
+      result_map: result_map,
+      decoded_protobuf: decoded_protobuf,
+      encoded_protobuf: encoded_protobuf
+    }
   end
 
   describe "encode/1" do
-    test "encode map to protobuffer", %{result_map: result_map} do
+    test "encode map to protobuffer", %{
+      result_map: result_map,
+      encoded_protobuf: encoded_protobuf
+    } do
       encoded = Protobuf.encode(result_map)
-      decoded_pb = Result.decode(encoded)
 
-      assert %Result{
-               AwayTeam: "Mallorca",
-               Date: "22/08/15",
-               Div: "SP2",
-               FTAG: "0",
-               FTHG: "2",
-               FTR: "H",
-               HTAG: "0",
-               HTHG: "1",
-               HTR: "H",
-               HomeTeam: "Alcorcon",
-               Season: "201516"
-             } == decoded_pb
+      assert encoded == encoded_protobuf
     end
 
-    test "encode list of maps to protobuffer", %{result_map: result_map} do
+    test "encode list of maps to protobuffer", %{
+      result_map: result_map,
+      encoded_protobuf: encoded_protobuf
+    } do
       list_of_maps = [result_map, result_map, result_map]
       encoded = Protobuf.encode(list_of_maps)
 
-      decoded_list = encoded |> Enum.map(fn result -> Result.decode(result) end)
+      Enum.each(encoded, fn result -> result == encoded_protobuf end)
+    end
+  end
 
-      assert length(decoded_list) == 3
+  describe "dencode/1" do
+    test "dencode map to protobuffer", %{
+      decoded_protobuf: decoded_protobuf,
+      encoded_protobuf: encoded_protobuf
+    } do
+      decoded_pb = Result.decode(encoded_protobuf)
 
-      decoded_pb = decoded_list |> Enum.uniq()
-
-      assert [
-               %Result{
-                 AwayTeam: "Mallorca",
-                 Date: "22/08/15",
-                 Div: "SP2",
-                 FTAG: "0",
-                 FTHG: "2",
-                 FTR: "H",
-                 HTAG: "0",
-                 HTHG: "1",
-                 HTR: "H",
-                 HomeTeam: "Alcorcon",
-                 Season: "201516"
-               }
-             ] == decoded_pb
+      assert decoded_protobuf == decoded_pb
     end
   end
 end
