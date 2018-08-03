@@ -3,12 +3,12 @@ defmodule FootballApiWeb.V1.Protobuffer.ResultsController do
   use FootballApiWeb, :controller
 
   alias FootballApi.DataServer
-  alias FootballApi.Protobuf.Results
+  alias FootballApi.Protobuf.Protobuf
 
   def index(conn, _params) do
     results =
       DataServer.get_by([])
-      |> Results.to_proto()
+      |> Protobuf.encode()
 
     conn
     |> put_resp_header("content-type", "application/x-protobuf")
