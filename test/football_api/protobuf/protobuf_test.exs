@@ -1,8 +1,8 @@
-defmodule FootballApi.Protobuf.ResultsTest do
+defmodule FootballApi.Protobuf.ProtobufTest do
   use ExUnit.Case, async: true
 
-  alias FootballApi.Protobuf.Results
-  alias FootballApi.Protobuf.Results.Result
+  alias FootballApi.Protobuf.Protobuf
+  alias FootballApi.Protobuf.Protobuf.Result
 
   setup do
     result_map = %{
@@ -25,7 +25,7 @@ defmodule FootballApi.Protobuf.ResultsTest do
 
   describe "encode/1" do
     test "encode map to protobuffer", %{result_map: result_map} do
-      encoded = Results.encode(result_map)
+      encoded = Protobuf.encode(result_map)
       decoded_pb = Result.decode(encoded)
 
       assert %Result{
@@ -45,7 +45,7 @@ defmodule FootballApi.Protobuf.ResultsTest do
 
     test "encode list of maps to protobuffer", %{result_map: result_map} do
       list_of_maps = [result_map, result_map, result_map]
-      encoded = Results.encode(list_of_maps)
+      encoded = Protobuf.encode(list_of_maps)
 
       decoded_list = encoded |> Enum.map(fn result -> Result.decode(result) end)
 

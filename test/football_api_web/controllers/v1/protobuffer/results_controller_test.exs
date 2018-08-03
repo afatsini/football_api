@@ -1,9 +1,10 @@
 defmodule FootballApiWeb.V1.Protobuffer.ResultsControllerTest do
   use FootballApiWeb.ConnCase
 
-  alias FootballApi.Protobuf.Results.Result
+  alias FootballApi.Protobuf.Protobuf
+  alias FootballApi.Protobuf.Protobuf.Result
 
-  describe "index/2" do
+  describe "GET index/2" do
     test "return OK - 200 with json Protocol Buffer result", %{conn: conn} do
       response =
         conn
@@ -13,7 +14,7 @@ defmodule FootballApiWeb.V1.Protobuffer.ResultsControllerTest do
 
       assert Enum.member?(response.resp_headers, {"content-type", "application/x-protobuf"})
 
-      decoded_body = Result.decode(response.resp_body)
+      decoded_body = Protobuf.decode(response.resp_body)
 
       assert %Result{
                AwayTeam: _,

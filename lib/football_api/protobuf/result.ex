@@ -1,10 +1,10 @@
-defmodule FootballApi.Protobuf.Results do
+defmodule FootballApi.Protobuf.Protobuf do
   @moduledoc """
       Allow conversion to protocol buffer format
   """
   use Protobuf, from: Path.expand("result.proto", __DIR__)
 
-  alias FootballApi.Protobuf.Results.Result
+  alias FootballApi.Protobuf.Protobuf.Result
 
   def encode(entry) when is_map(entry) do
     entry
