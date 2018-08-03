@@ -1,4 +1,4 @@
-defmodule FootballApiWeb.JsonApi.ResultsController do
+defmodule FootballApiWeb.V1.JsonApi.ResultsController do
   @moduledoc """
     Result controller in charge of receiving the filter,
     passing it to the business layer and render the results

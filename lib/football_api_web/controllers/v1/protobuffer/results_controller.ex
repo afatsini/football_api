@@ -1,4 +1,4 @@
-defmodule FootballApiWeb.Protobuffer.ResultsController do
+defmodule FootballApiWeb.V1.Protobuffer.ResultsController do
   @moduledoc false
   use FootballApiWeb, :controller
 

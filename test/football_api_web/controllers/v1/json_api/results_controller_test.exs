@@ -1,4 +1,4 @@
-defmodule FootballApiWeb.JsonApi.ResultsControllerTest do
+defmodule FootballApiWeb.V1.JsonApi.ResultsControllerTest do
   @moduledoc """
     Controller test is used as integration test, going though all
     the real objects

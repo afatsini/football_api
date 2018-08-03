@@ -13,13 +13,13 @@ defmodule FootballApiWeb.Router do
     get("/", PageController, :index)
   end
 
-  scope "/json-api", FootballApiWeb.JsonApi do
+  scope "/v1/json-api", FootballApiWeb.V1.JsonApi do
     pipe_through(:jsonapi)
 
     get("/results", ResultsController, :index)
   end
 
-  scope "/protobuffer", FootballApiWeb.Protobuffer do
+  scope "/v1/protobuffer", FootballApiWeb.V1.Protobuffer do
     pipe_through(:protobuffer)
 
     get("/results", ResultsController, :index)
