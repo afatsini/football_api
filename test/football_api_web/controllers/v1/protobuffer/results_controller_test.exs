@@ -2,7 +2,6 @@ defmodule FootballApiWeb.V1.Protobuffer.ResultsControllerTest do
   use FootballApiWeb.ConnCase
 
   alias FootballApi.Protobuf.Protobuf
-  alias FootballApi.Protobuf.Protobuf.Result
   alias FootballApi.Protobuf.ProtoParams
 
   describe "GET index/2" do
