@@ -1,4 +1,6 @@
 defmodule FootballApiWeb.PageControllerTest do
+  use ExUnit.Case, async: true
+
   use FootballApiWeb.ConnCase
 
   test "GET /", %{conn: conn} do

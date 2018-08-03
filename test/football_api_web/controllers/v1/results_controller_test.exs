@@ -1,4 +1,8 @@
 defmodule FootballApiWeb.V1.ResultsControllerTest do
+  @moduledoc """
+    Controller test is used as integration test, going though all
+    the real objects
+  """
   use FootballApiWeb.ConnCase
 
   describe "index/2" do
@@ -32,5 +36,33 @@ defmodule FootballApiWeb.V1.ResultsControllerTest do
         "jsonapi" => %{"version" => "1.0"}
       } = response
     end
+  end
+
+  test "return results filtered by div param", %{conn: conn} do
+    value = "SP1"
+
+    response =
+      conn
+      |> get(results_path(conn, :index, %{div: value}))
+      |> json_response(200)
+
+    [div_from_result] =
+      response["data"] |> Enum.map(fn result -> result["attributes"]["Div"] end) |> Enum.uniq()
+
+    assert div_from_result == value
+  end
+
+  test "return results filtered by season param", %{conn: conn} do
+    value = "201617"
+
+    response =
+      conn
+      |> get(results_path(conn, :index, %{season: value}))
+      |> json_response(200)
+
+    [season_filter] =
+      response["data"] |> Enum.map(fn result -> result["attributes"]["Season"] end) |> Enum.uniq()
+
+    assert season_filter == value
   end
 end
