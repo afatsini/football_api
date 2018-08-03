@@ -13,7 +13,6 @@ defmodule FootballApi.Protobuf.ProtoParams do
   end
 
   def decode(entry) do
-    decoded_entry = Params.decode(entry)
-    %{div: decoded_entry.div, season: decoded_entry.season}
+    Params.decode(entry) |> Map.from_struct()
   end
 end

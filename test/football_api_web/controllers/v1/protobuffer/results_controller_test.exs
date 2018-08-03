@@ -17,7 +17,7 @@ defmodule FootballApiWeb.V1.Protobuffer.ResultsControllerTest do
 
       decoded_body = Protobuf.decode(response.resp_body)
 
-      assert %Result{
+      assert %{
                AwayTeam: _,
                Date: _,
                Div: _,
@@ -49,7 +49,7 @@ defmodule FootballApiWeb.V1.Protobuffer.ResultsControllerTest do
 
       decoded_body = Protobuf.decode(response.resp_body)
 
-      assert %Result{
+      assert %{
                AwayTeam: _,
                Date: _,
                Div: _,
