@@ -3,9 +3,10 @@ defmodule FootballApi.Protobuf.MatchTest do
 
   alias FootballApi.Protobuf.Match
   alias FootballApi.Protobuf.Match.Match, as: ProtoMatch
+  alias FootballApi.Schemas.Match, as: MatchObject
 
   setup do
-    decoded_protobuf = %{
+    decoded_protobuf = %MatchObject{
       AwayTeam: "Mallorca",
       Date: "22/08/15",
       Div: "SP2",
@@ -16,10 +17,11 @@ defmodule FootballApi.Protobuf.MatchTest do
       HTHG: "1",
       HTR: "H",
       HomeTeam: "Alcorcon",
-      Season: "201516"
+      Season: "201516",
+      id: "1"
     }
 
-    encoded_protobuf = decoded_protobuf |> ProtoMatch.new() |> ProtoMatch.encode()
+    encoded_protobuf = decoded_protobuf |> Map.from_struct |> ProtoMatch.new() |> ProtoMatch.encode()
 
     %{
       decoded_protobuf: decoded_protobuf,

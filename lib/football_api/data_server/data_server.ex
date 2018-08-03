@@ -5,6 +5,8 @@ defmodule FootballApi.DataServer do
 
   use GenServer
 
+  alias FootballApi.Schemas.Match
+
   @data_path Application.get_env(:football_api, FootballApi.DataServer)[:data_path]
   @table_name Application.get_env(:football_api, FootballApi.DataServer)[:table_name]
 
@@ -79,7 +81,9 @@ defmodule FootballApi.DataServer do
     |> File.stream!()
     |> CSV.decode!(headers: true)
     |> Enum.map(fn line ->
-      line |> Enum.into(%{}, fn {key, value} -> {String.to_atom(key), value} end)
+      line
+      |> Enum.into(%{}, fn {key, value} -> {String.to_atom(key), value} end)
+      |> Match.new
     end)
   end
 
@@ -98,6 +102,9 @@ defmodule FootballApi.DataServer do
   end
 
   defp build_key(entry) do
-    {entry[:Div], entry[:Season]}
+    div = Map.get(entry, :Div)
+    season = Map.get(entry, :Season)
+
+    {div, season}
   end
 end

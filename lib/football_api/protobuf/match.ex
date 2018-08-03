@@ -5,9 +5,11 @@ defmodule FootballApi.Protobuf.Match do
   use Protobuf, from: Path.expand("match.proto", __DIR__)
 
   alias __MODULE__
+  alias FootballApi.Schemas.Match, as: MatchObject
 
   def encode(entry) when is_map(entry) do
     entry
+    |> Map.from_struct()
     |> Match.Match.new()
     |> Match.Match.encode()
   end
@@ -18,6 +20,6 @@ defmodule FootballApi.Protobuf.Match do
   end
 
   def decode(entry) do
-    entry |> Match.Match.decode() |> Map.from_struct()
+    entry |> Match.Match.decode() |> Map.from_struct() |> MatchObject.new()
   end
 end

@@ -59,7 +59,8 @@ defmodule FootballApiWeb.V1.Protobuffer.MatchControllerTest do
                HTHG: _,
                HTR: _,
                HomeTeam: _,
-               Season: _
+               Season: _,
+               id: _
              } = decoded_body
     end
 
@@ -74,8 +75,8 @@ defmodule FootballApiWeb.V1.Protobuffer.MatchControllerTest do
 
       decoded_body = Match.decode(response.resp_body)
 
-      assert decoded_body[:Div] == "SP1"
-      assert decoded_body[:Season] == "201617"
+      assert Map.get(decoded_body, :Div) == "SP1"
+      assert Map.get(decoded_body, :Season) == "201617"
     end
   end
 end

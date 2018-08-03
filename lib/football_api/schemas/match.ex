@@ -5,13 +5,28 @@ defmodule FootballApi.Schemas.Match do
   alias __MODULE__
   alias FootballApi.DataServer
 
-  defstruct [:Div, :Season, :Date, :HomeTeam, :AwayTeam, :FTHG, :FTAG, :FTR, :HTHG, :HTAG, :HTR]
+  use Ecto.Schema
 
-  def new(map \\ %{}) do
-    struct(Match, map)
+  embedded_schema do
+    field(:Div, :string)
+    field(:Season, :string)
+    field(:Date, :string)
+    field(:HomeTeam, :string)
+    field(:AwayTeam, :string)
+    field(:FTHG, :integer)
+    field(:FTAG, :integer)
+    field(:FTR, :string)
+    field(:HTHG, :integer)
+    field(:HTAG, :integer)
+    field(:HTR, :string)
   end
 
-  def get_by(query) do
+  def new(map \\ %{}) do
+    params = Map.put(map, :id, map[:""])
+    struct(Match, params)
+  end
+
+  def get_by(query \\ []) do
     DataServer.get_by(query)
   end
 end
