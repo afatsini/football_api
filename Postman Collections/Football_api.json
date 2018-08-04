@@ -213,27 +213,26 @@
               },
               "response": [
                 {
-                  "id": "accc1af0-1cfa-4bb2-9686-bd89c7c243f1",
-                  "name": "OK - GET results",
+                  "id": "acbc3a41-9778-4981-9839-fd4181cd2da3",
+                  "name": "GET matches",
                   "originalRequest": {
                     "method": "GET",
                     "header": [
                       {
                         "key": "Content-Type",
-                        "value": "application/x-protobuf",
-                        "disabled": false
+                        "value": "application/x-protobuf"
                       }
                     ],
                     "body": {},
                     "url": {
-                      "raw": "{{API_URL}}/v1/protobuffer/results",
+                      "raw": "{{API_URL}}/v1/protobuffer/matches",
                       "host": [
                         "{{API_URL}}"
                       ],
                       "path": [
                         "v1",
                         "protobuffer",
-                        "results"
+                        "matches"
                       ],
                       "query": [
                         {
@@ -269,7 +268,7 @@
                     },
                     {
                       "key": "date",
-                      "value": "Sat, 04 Aug 2018 11:13:31 GMT",
+                      "value": "Sat, 04 Aug 2018 11:29:35 GMT",
                       "name": "date",
                       "description": "The date and time that the message was sent"
                     },
@@ -282,7 +281,132 @@
                   ],
                   "cookie": [],
                   "responseTime": null,
-                  "body": "\n\u00041223\u0012\u0003SP2\u001a\u0006201516\"\b22/08/15*\bAlcorcon2\bMallorca:\u00012B\u00010J\u0001HR\u00011Z\u00010b\u0001H\n\u00041224\u0012\u0003SP2\u001a\u0006201516\"\b22/08/15*\u0007Cordoba2\nValladolid:\u00011B\u00010J\u0001HR\u00010Z\u00010b\u0001D\n\u00041225\u0012\u0003SP2\u001a\u0006201516\"\b22/08/15*\u0006Huesca2\u0006Alaves:\u00012B\u00013J\u0001AR\u00010Z\u00011b\u0001A\n\u00041226\u0012\u0003SP2\u001a\u0006201516\"\b22/08/15*\nLlagostera2\u0007Osasuna:\u00010B\u00012J\u0001AR\u00010Z\u00010b\u0001D"
+                  "body": "\n\u00041223\u0012\u0003SP2\u001a\u0006201516\"\b22/08/15*\bAlcorcon2\bMallorca:\u00012B\u00010J\u0001HR\u00011Z\u00010b\u0001H\n\u00041224\u0012\u0003SP2\u001a\u0006201516\"\b22/08/15*\u0007Cordoba2\nValladolid:\u00011B\u00010J\u0001HR\u00010Z\u00010b\u0001D\n\u00041225\u0012\u0003SP2\u001a\u0006201516\"\b22/08/15*\u0006Huesca2\u0006Alaves:\u00012B\u00013J\u0001AR\u00010Z\u00011b\u0001A"
+                }
+              ]
+            },
+            {
+              "_postman_id": "35c1d1f7-bba2-434f-82d6-98a7afe59fd2",
+              "name": "GET matches Copy",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "ade31803-a27a-4144-bef4-99712f8145cf",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Content-Type is application/json\", function () {",
+                      "    var contentType = postman.getResponseHeader('Content-Type');",
+                      "    pm.expect(contentType).to.eql('application/x-protobuf');",
+                      "});"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-protobuf"
+                  }
+                ],
+                "body": {},
+                "url": {
+                  "raw": "{{API_URL}}/v1/protobuffer/results",
+                  "host": [
+                    "{{API_URL}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "protobuffer",
+                    "results"
+                  ],
+                  "query": [
+                    {
+                      "key": "Content-Type",
+                      "value": "appl",
+                      "equals": true,
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "3c277fc8-37ec-49e0-ad8e-d9d100269d32",
+                  "name": "GET matches",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-protobuf"
+                      }
+                    ],
+                    "body": {},
+                    "url": {
+                      "raw": "{{API_URL}}/v1/protobuffer/matches",
+                      "host": [
+                        "{{API_URL}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "protobuffer",
+                        "matches"
+                      ],
+                      "query": [
+                        {
+                          "key": "Content-Type",
+                          "value": "appl",
+                          "equals": true,
+                          "disabled": true
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "raw",
+                  "header": [
+                    {
+                      "key": "cache-control",
+                      "value": "max-age=0, private, must-revalidate",
+                      "name": "cache-control",
+                      "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+                    },
+                    {
+                      "key": "content-length",
+                      "value": "157321",
+                      "name": "content-length",
+                      "description": "The length of the response body in octets (8-bit bytes)"
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/x-protobuf",
+                      "name": "content-type",
+                      "description": "The mime type of this content"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 04 Aug 2018 11:29:35 GMT",
+                      "name": "date",
+                      "description": "The date and time that the message was sent"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Cowboy",
+                      "name": "server",
+                      "description": "A name for the server"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "\n\u00041223\u0012\u0003SP2\u001a\u0006201516\"\b22/08/15*\bAlcorcon2\bMallorca:\u00012B\u00010J\u0001HR\u00011Z\u00010b\u0001H\n\u00041224\u0012\u0003SP2\u001a\u0006201516\"\b22/08/15*\u0007Cordoba2\nValladolid:\u00011B\u00010J\u0001HR\u00010Z\u00010b\u0001D\n\u00041225\u0012\u0003SP2\u001a\u0006201516\"\b22/08/15*\u0006Huesca2\u0006Alaves:\u00012B\u00013J\u0001AR\u00010Z\u00011b\u0001A"
                 }
               ]
             }
