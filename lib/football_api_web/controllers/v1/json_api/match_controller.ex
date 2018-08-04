@@ -12,7 +12,7 @@ defmodule FootballApiWeb.V1.JsonApi.MatchController do
   def index(conn, params) do
     with {:ok, schema} <- GetMatches.validate_params(params),
          query <- Map.from_struct(schema),
-         results <- Match.get_by(query) do
+         {:ok, results} <- Match.get_by(query) do
       render(conn, "index.json-api", data: results)
     else
       error -> error

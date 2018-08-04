@@ -23,6 +23,8 @@ defmodule FootballApiWeb do
       import Plug.Conn
       import FootballApiWeb.Router.Helpers
       import FootballApiWeb.Controller
+
+      action_fallback(FootballApiWeb.FallbackController)
     end
   end
 

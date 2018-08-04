@@ -12,11 +12,16 @@ defmodule FootballApiWeb.V1.Protobuffer.MatchController do
     with decoded_params <- Protobuf.Params.decode(body_params),
          {:ok, schema} <- GetMatches.validate_params(decoded_params),
          query <- Map.from_struct(schema),
-         results <- Match.get_by(query),
+         {:ok, results} <- Match.get_by(query),
          encoded_results <- Protobuf.Match.encode(results) do
       conn
       |> put_resp_header("content-type", "application/x-protobuf")
       |> send_resp(200, encoded_results)
+    else
+      error ->
+        conn
+        |> put_resp_header("content-type", "application/x-protobuf")
+        |> send_resp(422, error)
     end
   end
 end
