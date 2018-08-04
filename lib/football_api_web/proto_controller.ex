@@ -1,12 +1,17 @@
-defmodule FootballApiWeb.Controller do
+defmodule FootballApiWeb.ProtoController do
   @moduledoc false
 
-  import Phoenix.Controller
   import Plug.Conn
-
   alias Plug.Conn
+  alias FootballApi.Protobuf.Error
 
-  alias FootballApiWeb.ErrorView
+  @spec init(any) :: any
+  def init(default), do: default
+
+  @spec call(Conn.t(), any) :: Conn.t()
+  def call(conn, {:error, {:bad_request, errors}}), do: bad_input(conn, errors)
+  def call(conn, {:error, {:not_found, term}}), do: not_found(conn, term)
+  def call(conn, error), do: server_error(conn, error)
 
   @typep reason :: any
 
@@ -25,15 +30,11 @@ defmodule FootballApiWeb.Controller do
 
   @spec do_error(Conn.t(), http_code :: pos_integer, reason) :: Conn.t()
   defp do_error(conn, http_code, reason) do
-    reason = ensure_string(reason)
+    encoded_reason = Error.encode(%{reason: reason})
 
     conn
-    |> put_status(http_code)
-    |> render(ErrorView, "#{http_code}.json", %{detail: reason})
+    |> resp(http_code, encoded_reason)
+    |> put_resp_header("content-type", "application/x-protobuf")
     |> halt
   end
-
-  @spec ensure_string(reason) :: String.t()
-  defp ensure_string(reason) when is_bitstring(reason), do: reason
-  defp ensure_string(reason), do: inspect(reason)
 end

@@ -3,6 +3,7 @@ defmodule FootballApiWeb.V1.Protobuffer.MatchControllerTest do
 
   alias FootballApi.Protobuf.Match
   alias FootballApi.Protobuf.Params
+  alias FootballApi.Protobuf.Error
 
   describe "GET index/2" do
     test "return OK - 200 with json Protocol Buffer result", %{conn: conn} do
@@ -89,6 +90,10 @@ defmodule FootballApiWeb.V1.Protobuffer.MatchControllerTest do
         |> post("/v1/protobuffer/results", encoded_params)
 
       assert response.status == 404
+      assert Enum.member?(response.resp_headers, {"content-type", "application/x-protobuf"})
+      decoded_response = Error.decode(response.resp_body)
+
+      assert decoded_response == %{reason: "no_data_for_query"}
     end
   end
 end

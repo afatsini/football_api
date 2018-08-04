@@ -32,7 +32,7 @@ defmodule FootballApi.Schemas.Match do
       results = data_server.get_by(query)
       {:ok, results}
     else
-      {:error, {:not_found, :no_data_for_query}}
+      {:error, {:not_found, "no_data_for_query"}}
     end
   end
 

@@ -1,10 +1,13 @@
 defmodule FootballApiWeb.V1.JsonApi.MatchController do
   @moduledoc """
     Result controller in charge of receiving the filter,
-    passing it to the business layer and render the results
+    passing it to the business layer and render the results.
+    The endpoint returns a JSONApi format
   """
 
   use FootballApiWeb, :controller
+
+  action_fallback(FootballApiWeb.JsonController)
 
   alias FootballApi.Schemas.Match
   alias FootballApiWeb.Schemas.GetMatches

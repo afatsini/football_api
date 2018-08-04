@@ -1,6 +1,13 @@
 defmodule FootballApiWeb.V1.Protobuffer.MatchController do
-  @moduledoc false
+  @moduledoc """
+    Result controller in charge of receiving the filter,
+    passing it to the business layer and render the results.
+    The endpoint returns a PROTOCOL BUFFER format
+  """
+
   use FootballApiWeb, :controller
+
+  action_fallback(FootballApiWeb.ProtoController)
 
   alias FootballApi.Schemas.Match
   alias FootballApi.Protobuf
@@ -18,13 +25,7 @@ defmodule FootballApiWeb.V1.Protobuffer.MatchController do
       |> put_resp_header("content-type", "application/x-protobuf")
       |> send_resp(200, encoded_results)
     else
-      {:error, {:not_found, _}} ->
-        conn
-        |> put_resp_header("content-type", "application/x-protobuf")
-        |> put_status(404)
-
-      error ->
-        error
+      error -> error
     end
   end
 end
