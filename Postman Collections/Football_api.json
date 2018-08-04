@@ -1,0 +1,267 @@
+{
+  "info": {
+    "_postman_id": "a092fe43-5691-408a-b198-1a8f15e212da",
+    "name": "Football API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "_postman_id": "97433116-cf51-42a3-b417-74670c7be1f0",
+      "name": "json-api",
+      "description": "",
+      "item": [
+        {
+          "_postman_id": "7022948e-b5ce-4af8-8736-6c0735d6bbe4",
+          "name": "GET results",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "d4bdea01-821f-43bb-abca-979bf7321e04",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    var contentType = postman.getResponseHeader('Content-Type');",
+                  "    pm.expect(contentType).to.eql('application/vnd.api+json; charset=utf-8');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "{{API_URL}}/v1/json-api/results?div=SP1&season=201516",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "v1",
+                "json-api",
+                "results"
+              ],
+              "query": [
+                {
+                  "key": "div",
+                  "value": "SP1",
+                  "equals": true
+                },
+                {
+                  "key": "season",
+                  "value": "201516",
+                  "equals": true
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "51da5fdf-ea90-4064-9a07-a24da6478b33",
+              "name": "OK - GET results",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {},
+                "url": {
+                  "raw": "{{API_URL}}/v1/json-api/results?div=SP1&season=201516",
+                  "host": [
+                    "{{API_URL}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "json-api",
+                    "results"
+                  ],
+                  "query": [
+                    {
+                      "key": "div",
+                      "value": "SP1",
+                      "equals": true
+                    },
+                    {
+                      "key": "season",
+                      "value": "201516",
+                      "equals": true
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "cache-control",
+                  "value": "max-age=0, private, must-revalidate",
+                  "name": "cache-control",
+                  "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+                },
+                {
+                  "key": "content-length",
+                  "value": "75545",
+                  "name": "content-length",
+                  "description": "The length of the response body in octets (8-bit bytes)"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/vnd.api+json; charset=utf-8",
+                  "name": "content-type",
+                  "description": "The mime type of this content"
+                },
+                {
+                  "key": "date",
+                  "value": "Sat, 04 Aug 2018 11:13:36 GMT",
+                  "name": "date",
+                  "description": "The date and time that the message was sent"
+                },
+                {
+                  "key": "server",
+                  "value": "Cowboy",
+                  "name": "server",
+                  "description": "A name for the server"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\"jsonapi\":{\"version\":\"1.0\"},\"data\":[{\"type\":\"match\",\"id\":\"381\",\"attributes\":{\"Season\":\"201516\",\"HomeTeam\":\"Malaga\",\"HTR\":\"D\",\"HTHG\":\"0\",\"HTAG\":\"0\",\"FTR\":\"D\",\"FTHG\":\"0\",\"FTAG\":\"0\",\"Div\":\"SP1\",\"Date\":\"21/08/15\",\"AwayTeam\":\"Sevilla\"}},{\"type\":\"match\",\"id\":\"382\",\"attributes\":{\"Season\":\"201516\",\"HomeTeam\":\"Ath Madrid\",\"HTR\":\"H\",\"HTHG\":\"1\",\"HTAG\":\"0\",\"FTR\":\"H\",\"FTHG\":\"1\",\"FTAG\":\"0\",\"Div\":\"SP1\",\"Date\":\"22/08/15\",\"AwayTeam\":\"Las Palmas\"}}]}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_postman_id": "31222536-f326-48d7-8739-68ad464e37bc",
+      "name": "protobuffer",
+      "description": "",
+      "item": [
+        {
+          "_postman_id": "adb8cf81-40ac-4d1f-a0c1-c12d04e2924e",
+          "name": "GET results",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "ade31803-a27a-4144-bef4-99712f8145cf",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    var contentType = postman.getResponseHeader('Content-Type');",
+                  "    pm.expect(contentType).to.eql('application/x-protobuf');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-protobuf"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "{{API_URL}}/v1/protobuffer/results",
+              "host": [
+                "{{API_URL}}"
+              ],
+              "path": [
+                "v1",
+                "protobuffer",
+                "results"
+              ],
+              "query": [
+                {
+                  "key": "Content-Type",
+                  "value": "appl",
+                  "equals": true,
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "6cc39024-913e-4de0-acda-fbea3ce375c5",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "d11ca712-bd29-4280-bb92-a861b04fec71",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "_postman_id": "4070d317-f54d-45d1-bb33-aadf8389861d",
+      "name": "GET status",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "f091a483-4455-4b8e-8111-f5920d1f550b",
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Content-Type is application/json\", function () {",
+              "    var contentType = postman.getResponseHeader('Content-Type');",
+              "    pm.expect(contentType).to.eql('application/json; charset=utf-8');",
+              "});",
+              "",
+              "pm.test('result schema', function() {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.ping == \"pong\").to.be.true;",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {},
+        "url": "{{API_URL}}/"
+      },
+      "response": []
+    }
+  ]
+}
