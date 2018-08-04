@@ -18,10 +18,11 @@ defmodule FootballApiWeb.V1.Protobuffer.MatchController do
       |> put_resp_header("content-type", "application/x-protobuf")
       |> send_resp(200, encoded_results)
     else
-      error ->
+      {:error, {:not_found, _}} ->
         conn
         |> put_resp_header("content-type", "application/x-protobuf")
-        |> send_resp(422, error)
+        |> put_status(404)
+      error -> error
     end
   end
 end

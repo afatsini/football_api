@@ -66,4 +66,15 @@ defmodule FootballApiWeb.V1.JsonApi.MatchControllerTest do
 
     assert season_filter == value
   end
+
+  test "return 404 for non-existing params", %{conn: conn} do
+    params = %{season: :inexistent, div: :inexistent}
+
+    response =
+      conn
+      |> get(match_path(conn, :index, params))
+      |> json_response(404)
+
+    assert response == %{"errors" => %{"detail" => "Not Found"}}
+  end
 end
