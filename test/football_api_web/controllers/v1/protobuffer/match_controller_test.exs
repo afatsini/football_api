@@ -88,7 +88,7 @@ defmodule FootballApiWeb.V1.Protobuffer.MatchControllerTest do
         |> put_req_header("content-type", "application/x-protobuf")
         |> post("/v1/protobuffer/results", encoded_params)
 
-        assert response.status == 404
+      assert response.status == 404
     end
   end
 end

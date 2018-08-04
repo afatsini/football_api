@@ -22,7 +22,9 @@ defmodule FootballApiWeb.V1.Protobuffer.MatchController do
         conn
         |> put_resp_header("content-type", "application/x-protobuf")
         |> put_status(404)
-      error -> error
+
+      error ->
+        error
     end
   end
 end
