@@ -55,12 +55,14 @@
                 {
                   "key": "div",
                   "value": "SP1",
-                  "equals": true
+                  "equals": true,
+                  "description": "filter by division"
                 },
                 {
                   "key": "season",
                   "value": "201516",
-                  "equals": true
+                  "equals": true,
+                  "description": "filter by season"
                 }
               ]
             }
@@ -202,7 +204,80 @@
               ]
             }
           },
-          "response": []
+          "response": [
+            {
+              "id": "accc1af0-1cfa-4bb2-9686-bd89c7c243f1",
+              "name": "OK - GET results",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-protobuf",
+                    "disabled": false
+                  }
+                ],
+                "body": {},
+                "url": {
+                  "raw": "{{API_URL}}/v1/protobuffer/results",
+                  "host": [
+                    "{{API_URL}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "protobuffer",
+                    "results"
+                  ],
+                  "query": [
+                    {
+                      "key": "Content-Type",
+                      "value": "appl",
+                      "equals": true,
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "raw",
+              "header": [
+                {
+                  "key": "cache-control",
+                  "value": "max-age=0, private, must-revalidate",
+                  "name": "cache-control",
+                  "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+                },
+                {
+                  "key": "content-length",
+                  "value": "157321",
+                  "name": "content-length",
+                  "description": "The length of the response body in octets (8-bit bytes)"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/x-protobuf",
+                  "name": "content-type",
+                  "description": "The mime type of this content"
+                },
+                {
+                  "key": "date",
+                  "value": "Sat, 04 Aug 2018 11:13:31 GMT",
+                  "name": "date",
+                  "description": "The date and time that the message was sent"
+                },
+                {
+                  "key": "server",
+                  "value": "Cowboy",
+                  "name": "server",
+                  "description": "A name for the server"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "\n\u00041223\u0012\u0003SP2\u001a\u0006201516\"\b22/08/15*\bAlcorcon2\bMallorca:\u00012B\u00010J\u0001HR\u00011Z\u00010b\u0001H\n\u00041224\u0012\u0003SP2\u001a\u0006201516\"\b22/08/15*\u0007Cordoba2\nValladolid:\u00011B\u00010J\u0001HR\u00010Z\u00010b\u0001D\n\u00041225\u0012\u0003SP2\u001a\u0006201516\"\b22/08/15*\u0006Huesca2\u0006Alaves:\u00012B\u00013J\u0001AR\u00010Z\u00011b\u0001A\n\u00041226\u0012\u0003SP2\u001a\u0006201516\"\b22/08/15*\nLlagostera2\u0007Osasuna:\u00010B\u00012J\u0001AR\u00010Z\u00010b\u0001D"
+            }
+          ]
         }
       ],
       "event": [
@@ -261,7 +336,56 @@
         "body": {},
         "url": "{{API_URL}}/"
       },
-      "response": []
+      "response": [
+        {
+          "id": "4b71c62a-6180-4b4e-9086-ae69563dd74b",
+          "name": "OK - GET status",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {},
+            "url": "{{API_URL}}/"
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "cache-control",
+              "value": "max-age=0, private, must-revalidate",
+              "name": "cache-control",
+              "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+            },
+            {
+              "key": "content-length",
+              "value": "15",
+              "name": "content-length",
+              "description": "The length of the response body in octets (8-bit bytes)"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8",
+              "name": "content-type",
+              "description": "The mime type of this content"
+            },
+            {
+              "key": "date",
+              "value": "Sat, 04 Aug 2018 11:13:27 GMT",
+              "name": "date",
+              "description": "The date and time that the message was sent"
+            },
+            {
+              "key": "server",
+              "value": "Cowboy",
+              "name": "server",
+              "description": "A name for the server"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "{\"ping\":\"pong\"}"
+        }
+      ]
     }
   ]
 }
