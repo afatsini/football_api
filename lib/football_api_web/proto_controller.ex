@@ -12,9 +12,7 @@ defmodule FootballApiWeb.ProtoController do
   def call(conn, {:error, :bad_request}), do: do_error(conn, 400, "Bad Request")
   def call(conn, {:error, :not_found}), do: do_error(conn, 404, "Not found")
 
-  @typep reason :: any
-
-  @spec do_error(Conn.t(), http_code :: pos_integer, reason) :: Conn.t()
+  @spec do_error(Conn.t(), http_code :: pos_integer, term) :: Conn.t()
   defp do_error(conn, http_code, reason) do
     encoded_reason = Error.encode(%{reason: reason})
 
