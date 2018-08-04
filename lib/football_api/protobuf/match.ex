@@ -2,7 +2,7 @@ defmodule FootballApi.Protobuf.Match do
   @moduledoc """
       Allow conversion to protocol buffer format
   """
-  use Protobuf, from: Path.expand("match.proto", __DIR__)
+  use Protobuf, from: Path.expand("protos/match.proto", __DIR__)
 
   alias __MODULE__
   alias FootballApi.Schemas.Match, as: MatchObject

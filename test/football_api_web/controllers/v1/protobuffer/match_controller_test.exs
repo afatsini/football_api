@@ -2,7 +2,7 @@ defmodule FootballApiWeb.V1.Protobuffer.MatchControllerTest do
   use FootballApiWeb.ConnCase
 
   alias FootballApi.Protobuf.Match
-  alias FootballApi.Protobuf.ProtoParams
+  alias FootballApi.Protobuf.Params
 
   describe "GET index/2" do
     test "return OK - 200 with json Protocol Buffer result", %{conn: conn} do
@@ -35,7 +35,7 @@ defmodule FootballApiWeb.V1.Protobuffer.MatchControllerTest do
   describe "POST index/2" do
     test "return OK - 200 with json Protocol Buffer result", %{conn: conn} do
       params = %{}
-      encoded_params = params |> ProtoParams.Params.new() |> ProtoParams.Params.encode()
+      encoded_params = params |> Params.Params.new() |> Params.Params.encode()
 
       response =
         conn
@@ -66,7 +66,7 @@ defmodule FootballApiWeb.V1.Protobuffer.MatchControllerTest do
 
     test "return results filtered by div and season param", %{conn: conn} do
       params = %{div: "SP1", season: "201617"}
-      encoded_params = params |> ProtoParams.Params.new() |> ProtoParams.Params.encode()
+      encoded_params = params |> Params.Params.new() |> Params.Params.encode()
 
       response =
         conn

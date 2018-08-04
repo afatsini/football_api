@@ -9,7 +9,7 @@ defmodule FootballApiWeb.V1.Protobuffer.MatchController do
   def index(conn, _params) do
     {:ok, body_params, _} = read_body(conn)
 
-    with decoded_params <- Protobuf.ProtoParams.decode(body_params),
+    with decoded_params <- Protobuf.Params.decode(body_params),
          {:ok, schema} <- GetMatches.validate_params(decoded_params),
          query <- Map.from_struct(schema),
          results <- Match.get_by(query),
