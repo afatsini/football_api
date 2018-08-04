@@ -17,7 +17,7 @@
           "item": [
             {
               "_postman_id": "7022948e-b5ce-4af8-8736-6c0735d6bbe4",
-              "name": "GET results",
+              "name": "GET matches",
               "event": [
                 {
                   "listen": "test",
