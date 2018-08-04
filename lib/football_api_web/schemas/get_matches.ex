@@ -20,7 +20,7 @@ defmodule FootballApiWeb.Schemas.GetMatches do
 
     case changeset.valid? do
       true -> {:ok, apply_changes(changeset)}
-      false -> {:error, {:bad_request, traverse_errors(changeset, & &1)}}
+      false -> {:error, :bad_request}
     end
   end
 

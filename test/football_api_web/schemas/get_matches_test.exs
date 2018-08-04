@@ -23,7 +23,7 @@ defmodule FootballApiWeb.Schemas.GetMatchesTest do
     } do
       invalid_params
       |> Enum.each(fn param ->
-        assert {:error, {:bad_request, _}} = GetMatches.validate_params(param)
+        assert {:error, :bad_request} = GetMatches.validate_params(param)
       end)
     end
   end
