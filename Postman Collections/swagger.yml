@@ -1,0 +1,350 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: Football API
+  description: 'A a simple Elixir application that serves the football results included in the attached data.csv file'
+host: example.com
+basePath: /
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /v1/json-api/matches:
+    get:
+      description: ''
+      summary: GET matches
+      tags:
+        - json-api
+      operationId: V1JsonApiMatchesGet
+      produces:
+        - application/json
+      parameters:
+        - name: div
+          in: query
+          required: false
+          type: string
+          description: ''
+        - name: season
+          in: query
+          required: false
+          type: string
+          format: int32
+          description: ''
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: ''
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/GetMatchesresponse'
+          examples:
+            application/json:
+              jsonapi:
+                version: '1.0'
+              data:
+                - type: match
+                  id: '381'
+                  attributes:
+                    Season: '201516'
+                    HomeTeam: Malaga
+                    HTR: D
+                    HTHG: '0'
+                    HTAG: '0'
+                    FTR: D
+                    FTHG: '0'
+                    FTAG: '0'
+                    Div: SP1
+                    Date: 21/08/15
+                    AwayTeam: Sevilla
+                - type: match
+                  id: '382'
+                  attributes:
+                    Season: '201516'
+                    HomeTeam: Ath Madrid
+                    HTR: H
+                    HTHG: '1'
+                    HTAG: '0'
+                    FTR: H
+                    FTHG: '1'
+                    FTAG: '0'
+                    Div: SP1
+                    Date: 22/08/15
+                    AwayTeam: Las Palmas
+      security: []
+  /v1/protobuffer/matches:
+    get:
+      description: ''
+      summary: GET matches
+      tags:
+        - protobuffer
+      operationId: V1ProtobufferMatchesGet
+      produces:
+        - application/json
+      parameters:
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: ''
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: string
+          examples:
+            text/plain: "\n\x041223\x12\x03SP2\x1A\x06201516\"\b22/08/15*\bAlcorcon2\bMallorca:\x012B\x010J\x01HR\x011Z\x010b\x01H\n\x041224\x12\x03SP2\x1A\x06201516\"\b22/08/15*\aCordoba2\nValladolid:\x011B\x010J\x01HR\x010Z\x010b\x01D\n\x041225\x12\x03SP2\x1A\x06201516\"\b22/08/15*\x06Huesca2\x06Alaves:\x012B\x013J\x01AR\x010Z\x011b\x01A"
+      security: []
+    post:
+      description: ''
+      summary: GET matches with filter
+      tags:
+        - protobuffer
+      operationId: V1ProtobufferMatchesPost
+      produces:
+        - application/x-protobuf
+      consumes:
+        - multipart/form-data
+      parameters:
+        - name: Params
+          in: body
+          format: protocol buffer
+          description: 'Encoded Parameters'
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: ''
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: string
+          examples:
+            text/plain: "\n\x041223\x12\x03SP2\x1A\x06201516\"\b22/08/15*\bAlcorcon2\bMallorca:\x012B\x010J\x01HR\x011Z\x010b\x01H\n\x041224\x12\x03SP2\x1A\x06201516\"\b22/08/15*\aCordoba2\nValladolid:\x011B\x010J\x01HR\x010Z\x010b\x01D\n\x041225\x12\x03SP2\x1A\x06201516\"\b22/08/15*\x06Huesca2\x06Alaves:\x012B\x013J\x01AR\x010Z\x011b\x01A"
+      security: []
+  /:
+    get:
+      description: ''
+      summary: GET status
+      operationId: UnnammedEndpointGet
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/GetStatusresponse'
+          examples:
+            application/json:
+              ping: pong
+      security: []
+definitions:
+  GetMatchesresponse:
+    title: GET matchesResponse
+    example:
+      jsonapi:
+        version: '1.0'
+      data:
+        - type: match
+          id: '381'
+          attributes:
+            Season: '201516'
+            HomeTeam: Malaga
+            HTR: D
+            HTHG: '0'
+            HTAG: '0'
+            FTR: D
+            FTHG: '0'
+            FTAG: '0'
+            Div: SP1
+            Date: 21/08/15
+            AwayTeam: Sevilla
+        - type: match
+          id: '382'
+          attributes:
+            Season: '201516'
+            HomeTeam: Ath Madrid
+            HTR: H
+            HTHG: '1'
+            HTAG: '0'
+            FTR: H
+            FTHG: '1'
+            FTAG: '0'
+            Div: SP1
+            Date: 22/08/15
+            AwayTeam: Las Palmas
+    type: object
+    properties:
+      jsonapi:
+        $ref: '#/definitions/Jsonapi'
+      data:
+        description: ''
+        example:
+          - type: match
+            id: '381'
+            attributes:
+              Season: '201516'
+              HomeTeam: Malaga
+              HTR: D
+              HTHG: '0'
+              HTAG: '0'
+              FTR: D
+              FTHG: '0'
+              FTAG: '0'
+              Div: SP1
+              Date: 21/08/15
+              AwayTeam: Sevilla
+          - type: match
+            id: '382'
+            attributes:
+              Season: '201516'
+              HomeTeam: Ath Madrid
+              HTR: H
+              HTHG: '1'
+              HTAG: '0'
+              FTR: H
+              FTHG: '1'
+              FTAG: '0'
+              Div: SP1
+              Date: 22/08/15
+              AwayTeam: Las Palmas
+        type: array
+        items:
+          $ref: '#/definitions/Match'
+    required:
+      - jsonapi
+      - data
+  Jsonapi:
+    title: Jsonapi
+    example:
+      version: '1.0'
+    type: object
+    properties:
+      version:
+        description: ''
+        example: '1.0'
+        type: string
+    required:
+      - version
+  Match:
+    title: Match
+    example:
+      type: match
+      id: '381'
+      attributes:
+        Season: '201516'
+        HomeTeam: Malaga
+        HTR: D
+        HTHG: '0'
+        HTAG: '0'
+        FTR: D
+        FTHG: '0'
+        FTAG: '0'
+        Div: SP1
+        Date: 21/08/15
+        AwayTeam: Sevilla
+    type: object
+    properties:
+      type:
+        description: ''
+        example: match
+        type: string
+      id:
+        description: ''
+        example: '381'
+        type: string
+      attributes:
+        $ref: '#/definitions/Attributes'
+    required:
+      - type
+      - id
+      - attributes
+  Attributes:
+    title: Attributes
+    example:
+      Season: '201516'
+      HomeTeam: Malaga
+      HTR: D
+      HTHG: '0'
+      HTAG: '0'
+      FTR: D
+      FTHG: '0'
+      FTAG: '0'
+      Div: SP1
+      Date: 21/08/15
+      AwayTeam: Sevilla
+    type: object
+    properties:
+      Season:
+        description: ''
+        example: '201516'
+        type: string
+      HomeTeam:
+        description: ''
+        example: Malaga
+        type: string
+      HTR:
+        description: ''
+        example: D
+        type: string
+      HTHG:
+        description: ''
+        example: '0'
+        type: string
+      HTAG:
+        description: ''
+        example: '0'
+        type: string
+      FTR:
+        description: ''
+        example: D
+        type: string
+      FTHG:
+        description: ''
+        example: '0'
+        type: string
+      FTAG:
+        description: ''
+        example: '0'
+        type: string
+      Div:
+        description: ''
+        example: SP1
+        type: string
+      Date:
+        description: ''
+        example: 21/08/15
+        type: string
+      AwayTeam:
+        description: ''
+        example: Sevilla
+        type: string
+    required:
+      - Season
+      - HomeTeam
+      - HTR
+      - HTHG
+      - HTAG
+      - FTR
+      - FTHG
+      - FTAG
+      - Div
+      - Date
+      - AwayTeam
+  GetStatusresponse:
+    title: GET statusResponse
+    example:
+      ping: pong
+    type: object
+    properties:
+      ping:
+        description: ''
+        example: pong
+        type: string
+    required:
+      - ping

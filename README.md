@@ -61,7 +61,7 @@ That should print that we are running 5 replicas.
 ### More settings
 All the swarm settings can be edited via docker-compose.yml file.
 
-## Technology used
+### Technology used
 The HA setting is build using the docker swarm and the dockercloud-haproxy image.
 The image expects the env var SERVICE_PORTS to be set in the dockerfile with the
 exposed ports.
@@ -72,5 +72,42 @@ exposed ports.
 - https://hub.docker.com/r/dockercloud/haproxy/
 - https://docs.docker.com/network/network-tutorial-overlay/
 
+## Test
+To ensure that the project is properly working, you can run the test suit:
 
+`mix test`
 
+## API reference
+The API reference can be found in the `Postman Collections` folder,
+generated with Postman.
+It includes a swagger definition in the `swagger.yml`.
+
+It also contains a Postman test suite `Football_api.json` that can be 
+imported to Postman and make live requests to the api.
+To run it, you also need to import the environment file `FOOTBALL API.postman_environment.json`
+and set the proper API_URL where the project is running.
+
+Postman also provides an online version of the swagger definition:
+
+`https://documenter.getpostman.com/view/1036615/RWThSfc8`
+
+### Protocol buffers requests
+In order to run the protocol buffer requests (`GET matches with filter`)
+you need to select a binary file containing the params encoded.
+
+In the subfolder `proto_requests` you can find 2 examples of already encoded
+parameters:
+
+- **div_SP1_param**: contains the parameter %{div: "SP1"}
+- **div_SP1_season_201617_param**: contains the parameter %{div: "SP1", season: "201617"}
+
+you can generate more examples using the iex console:
+
+```elixir
+iex(1)> encoded_params = %{div: "SP1", season: "201617"} |> FootballApi.Protobuf.Params.Params.new() |> FootballApi.Protobuf.Params.Params.encode()
+<<10, 3, 83, 80, 49, 18, 6, 50, 48, 49, 54, 49, 55>>
+iex(2) > {:ok, file} = File.open "somefile", [:write]
+{:ok, #PID<0.352.0>}
+iex(3)> IO.binwrite file, encoded_params
+:ok
+```
