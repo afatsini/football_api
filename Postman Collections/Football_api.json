@@ -6,161 +6,6 @@
   },
   "item": [
     {
-      "_postman_id": "31222536-f326-48d7-8739-68ad464e37bc",
-      "name": "protobuffer",
-      "description": "",
-      "item": [
-        {
-          "_postman_id": "adb8cf81-40ac-4d1f-a0c1-c12d04e2924e",
-          "name": "GET results",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "id": "ade31803-a27a-4144-bef4-99712f8145cf",
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status code is 200\", function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "",
-                  "pm.test(\"Content-Type is application/json\", function () {",
-                  "    var contentType = postman.getResponseHeader('Content-Type');",
-                  "    pm.expect(contentType).to.eql('application/x-protobuf');",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-protobuf"
-              }
-            ],
-            "body": {},
-            "url": {
-              "raw": "{{API_URL}}/v1/protobuffer/results",
-              "host": [
-                "{{API_URL}}"
-              ],
-              "path": [
-                "v1",
-                "protobuffer",
-                "results"
-              ],
-              "query": [
-                {
-                  "key": "Content-Type",
-                  "value": "appl",
-                  "equals": true,
-                  "disabled": true
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "accc1af0-1cfa-4bb2-9686-bd89c7c243f1",
-              "name": "OK - GET results",
-              "originalRequest": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/x-protobuf",
-                    "disabled": false
-                  }
-                ],
-                "body": {},
-                "url": {
-                  "raw": "{{API_URL}}/v1/protobuffer/results",
-                  "host": [
-                    "{{API_URL}}"
-                  ],
-                  "path": [
-                    "v1",
-                    "protobuffer",
-                    "results"
-                  ],
-                  "query": [
-                    {
-                      "key": "Content-Type",
-                      "value": "appl",
-                      "equals": true,
-                      "disabled": true
-                    }
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "raw",
-              "header": [
-                {
-                  "key": "cache-control",
-                  "value": "max-age=0, private, must-revalidate",
-                  "name": "cache-control",
-                  "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-                },
-                {
-                  "key": "content-length",
-                  "value": "157321",
-                  "name": "content-length",
-                  "description": "The length of the response body in octets (8-bit bytes)"
-                },
-                {
-                  "key": "content-type",
-                  "value": "application/x-protobuf",
-                  "name": "content-type",
-                  "description": "The mime type of this content"
-                },
-                {
-                  "key": "date",
-                  "value": "Sat, 04 Aug 2018 11:13:31 GMT",
-                  "name": "date",
-                  "description": "The date and time that the message was sent"
-                },
-                {
-                  "key": "server",
-                  "value": "Cowboy",
-                  "name": "server",
-                  "description": "A name for the server"
-                }
-              ],
-              "cookie": [],
-              "responseTime": null,
-              "body": "\n\u00041223\u0012\u0003SP2\u001a\u0006201516\"\b22/08/15*\bAlcorcon2\bMallorca:\u00012B\u00010J\u0001HR\u00011Z\u00010b\u0001H\n\u00041224\u0012\u0003SP2\u001a\u0006201516\"\b22/08/15*\u0007Cordoba2\nValladolid:\u00011B\u00010J\u0001HR\u00010Z\u00010b\u0001D\n\u00041225\u0012\u0003SP2\u001a\u0006201516\"\b22/08/15*\u0006Huesca2\u0006Alaves:\u00012B\u00013J\u0001AR\u00010Z\u00011b\u0001A\n\u00041226\u0012\u0003SP2\u001a\u0006201516\"\b22/08/15*\nLlagostera2\u0007Osasuna:\u00010B\u00012J\u0001AR\u00010Z\u00010b\u0001D"
-            }
-          ]
-        }
-      ],
-      "event": [
-        {
-          "listen": "prerequest",
-          "script": {
-            "id": "6cc39024-913e-4de0-acda-fbea3ce375c5",
-            "type": "text/javascript",
-            "exec": [
-              ""
-            ]
-          }
-        },
-        {
-          "listen": "test",
-          "script": {
-            "id": "d11ca712-bd29-4280-bb92-a861b04fec71",
-            "type": "text/javascript",
-            "exec": [
-              ""
-            ]
-          }
-        }
-      ]
-    },
-    {
       "_postman_id": "5472b5f5-9bdd-4c63-b776-6fafae58bb1b",
       "name": "v1",
       "description": "",
@@ -305,6 +150,162 @@
                   "body": "{\"jsonapi\":{\"version\":\"1.0\"},\"data\":[{\"type\":\"match\",\"id\":\"381\",\"attributes\":{\"Season\":\"201516\",\"HomeTeam\":\"Malaga\",\"HTR\":\"D\",\"HTHG\":\"0\",\"HTAG\":\"0\",\"FTR\":\"D\",\"FTHG\":\"0\",\"FTAG\":\"0\",\"Div\":\"SP1\",\"Date\":\"21/08/15\",\"AwayTeam\":\"Sevilla\"}},{\"type\":\"match\",\"id\":\"382\",\"attributes\":{\"Season\":\"201516\",\"HomeTeam\":\"Ath Madrid\",\"HTR\":\"H\",\"HTHG\":\"1\",\"HTAG\":\"0\",\"FTR\":\"H\",\"FTHG\":\"1\",\"FTAG\":\"0\",\"Div\":\"SP1\",\"Date\":\"22/08/15\",\"AwayTeam\":\"Las Palmas\"}}]}"
                 }
               ]
+            }
+          ],
+          "_postman_isSubFolder": true
+        },
+        {
+          "_postman_id": "31222536-f326-48d7-8739-68ad464e37bc",
+          "name": "protobuffer",
+          "description": "",
+          "item": [
+            {
+              "_postman_id": "adb8cf81-40ac-4d1f-a0c1-c12d04e2924e",
+              "name": "GET results",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "ade31803-a27a-4144-bef4-99712f8145cf",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Content-Type is application/json\", function () {",
+                      "    var contentType = postman.getResponseHeader('Content-Type');",
+                      "    pm.expect(contentType).to.eql('application/x-protobuf');",
+                      "});"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-protobuf"
+                  }
+                ],
+                "body": {},
+                "url": {
+                  "raw": "{{API_URL}}/v1/protobuffer/results",
+                  "host": [
+                    "{{API_URL}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "protobuffer",
+                    "results"
+                  ],
+                  "query": [
+                    {
+                      "key": "Content-Type",
+                      "value": "appl",
+                      "equals": true,
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "accc1af0-1cfa-4bb2-9686-bd89c7c243f1",
+                  "name": "OK - GET results",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-protobuf",
+                        "disabled": false
+                      }
+                    ],
+                    "body": {},
+                    "url": {
+                      "raw": "{{API_URL}}/v1/protobuffer/results",
+                      "host": [
+                        "{{API_URL}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "protobuffer",
+                        "results"
+                      ],
+                      "query": [
+                        {
+                          "key": "Content-Type",
+                          "value": "appl",
+                          "equals": true,
+                          "disabled": true
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "raw",
+                  "header": [
+                    {
+                      "key": "cache-control",
+                      "value": "max-age=0, private, must-revalidate",
+                      "name": "cache-control",
+                      "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+                    },
+                    {
+                      "key": "content-length",
+                      "value": "157321",
+                      "name": "content-length",
+                      "description": "The length of the response body in octets (8-bit bytes)"
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/x-protobuf",
+                      "name": "content-type",
+                      "description": "The mime type of this content"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 04 Aug 2018 11:13:31 GMT",
+                      "name": "date",
+                      "description": "The date and time that the message was sent"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Cowboy",
+                      "name": "server",
+                      "description": "A name for the server"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "\n\u00041223\u0012\u0003SP2\u001a\u0006201516\"\b22/08/15*\bAlcorcon2\bMallorca:\u00012B\u00010J\u0001HR\u00011Z\u00010b\u0001H\n\u00041224\u0012\u0003SP2\u001a\u0006201516\"\b22/08/15*\u0007Cordoba2\nValladolid:\u00011B\u00010J\u0001HR\u00010Z\u00010b\u0001D\n\u00041225\u0012\u0003SP2\u001a\u0006201516\"\b22/08/15*\u0006Huesca2\u0006Alaves:\u00012B\u00013J\u0001AR\u00010Z\u00011b\u0001A\n\u00041226\u0012\u0003SP2\u001a\u0006201516\"\b22/08/15*\nLlagostera2\u0007Osasuna:\u00010B\u00012J\u0001AR\u00010Z\u00010b\u0001D"
+                }
+              ]
+            }
+          ],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "6cc39024-913e-4de0-acda-fbea3ce375c5",
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "d11ca712-bd29-4280-bb92-a861b04fec71",
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
             }
           ],
           "_postman_isSubFolder": true
