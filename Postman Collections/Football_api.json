@@ -192,14 +192,14 @@
                 ],
                 "body": {},
                 "url": {
-                  "raw": "{{API_URL}}/v1/protobuffer/results",
+                  "raw": "{{API_URL}}/v1/protobuffer/matches",
                   "host": [
                     "{{API_URL}}"
                   ],
                   "path": [
                     "v1",
                     "protobuffer",
-                    "results"
+                    "matches"
                   ],
                   "query": [
                     {
