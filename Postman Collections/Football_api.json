@@ -287,7 +287,7 @@
             },
             {
               "_postman_id": "35c1d1f7-bba2-434f-82d6-98a7afe59fd2",
-              "name": "GET matches Copy",
+              "name": "GET matches with filter",
               "event": [
                 {
                   "listen": "test",
