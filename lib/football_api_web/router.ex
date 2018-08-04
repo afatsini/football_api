@@ -16,13 +16,13 @@ defmodule FootballApiWeb.Router do
   scope "/v1/json-api", FootballApiWeb.V1.JsonApi do
     pipe_through(:jsonapi)
 
-    get("/results", MatchController, :index)
+    get("/matches", MatchController, :index)
   end
 
   scope "/v1/protobuffer", FootballApiWeb.V1.Protobuffer do
     pipe_through(:protobuffer)
 
-    get("/results", MatchController, :index)
-    post("/results", MatchController, :index)
+    get("/matches", MatchController, :index)
+    post("/matches", MatchController, :index)
   end
 end

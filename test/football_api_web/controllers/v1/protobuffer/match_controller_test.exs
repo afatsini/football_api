@@ -11,7 +11,7 @@ defmodule FootballApiWeb.V1.Protobuffer.MatchControllerTest do
     test "return OK - 200 with json Protocol Buffer result", %{conn: conn} do
       response =
         conn
-        |> get("/v1/protobuffer/results")
+        |> get("/v1/protobuffer/matches")
 
       assert response.status == 200
 
@@ -43,7 +43,7 @@ defmodule FootballApiWeb.V1.Protobuffer.MatchControllerTest do
       response =
         conn
         |> put_req_header("content-type", "application/x-protobuf")
-        |> post("/v1/protobuffer/results", encoded_params)
+        |> post("/v1/protobuffer/matches", encoded_params)
 
       assert response.status == 200
 
@@ -67,14 +67,14 @@ defmodule FootballApiWeb.V1.Protobuffer.MatchControllerTest do
              } = decoded_body
     end
 
-    test "return results filtered by div and season param", %{conn: conn} do
+    test "return matches filtered by div and season param", %{conn: conn} do
       params = %{div: "SP1", season: "201617"}
       encoded_params = params |> Params.Params.new() |> Params.Params.encode()
 
       response =
         conn
         |> put_req_header("content-type", "application/x-protobuf")
-        |> post("/v1/protobuffer/results", encoded_params)
+        |> post("/v1/protobuffer/matches", encoded_params)
 
       decoded_body = Match.decode(response.resp_body)
 
@@ -89,7 +89,7 @@ defmodule FootballApiWeb.V1.Protobuffer.MatchControllerTest do
       response =
         conn
         |> put_req_header("content-type", "application/x-protobuf")
-        |> post("/v1/protobuffer/results", encoded_params)
+        |> post("/v1/protobuffer/matches", encoded_params)
 
       assert response.status == 404
       assert Enum.member?(response.resp_headers, {"content-type", "application/x-protobuf"})
@@ -109,7 +109,7 @@ defmodule FootballApiWeb.V1.Protobuffer.MatchControllerTest do
         response =
           conn
           |> put_req_header("content-type", "application/x-protobuf")
-          |> post("/v1/protobuffer/results", encoded_params)
+          |> post("/v1/protobuffer/matches", encoded_params)
 
         assert response.status == 400
         assert Enum.member?(response.resp_headers, {"content-type", "application/x-protobuf"})
