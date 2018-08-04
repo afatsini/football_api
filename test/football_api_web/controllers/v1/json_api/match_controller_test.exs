@@ -86,7 +86,7 @@ defmodule FootballApiWeb.V1.JsonApi.MatchControllerTest do
       validate_params: fn _params ->
         {:error, :bad_request}
       end do
-      params = %{season: :inexistent, div: :inexistent}
+      params = %{bad: :request}
 
       response =
         conn

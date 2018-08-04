@@ -5,6 +5,8 @@ defmodule FootballApiWeb.V1.Protobuffer.MatchControllerTest do
   alias FootballApi.Protobuf.Params
   alias FootballApi.Protobuf.Error
 
+  import Mock
+
   describe "GET index/2" do
     test "return OK - 200 with json Protocol Buffer result", %{conn: conn} do
       response =
@@ -94,6 +96,27 @@ defmodule FootballApiWeb.V1.Protobuffer.MatchControllerTest do
       decoded_response = Error.decode(response.resp_body)
 
       assert decoded_response == %{reason: "Not found"}
+    end
+
+    test "return 400 for validation errors", %{conn: conn} do
+      with_mock FootballApiWeb.Schemas.GetMatches,
+        validate_params: fn _params ->
+          {:error, :bad_request}
+        end do
+        params = %{bad: "request"}
+        encoded_params = params |> Params.Params.new() |> Params.Params.encode()
+
+        response =
+          conn
+          |> put_req_header("content-type", "application/x-protobuf")
+          |> post("/v1/protobuffer/results", encoded_params)
+
+        assert response.status == 400
+        assert Enum.member?(response.resp_headers, {"content-type", "application/x-protobuf"})
+        decoded_response = Error.decode(response.resp_body)
+
+        assert decoded_response == %{reason: "Bad Request"}
+      end
     end
   end
 end
