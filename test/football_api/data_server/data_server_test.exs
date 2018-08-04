@@ -16,7 +16,6 @@ defmodule FootballApi.DataServer.DataServerTest do
                {"SP1", "201617"},
                {"SP1", "201516"},
                {"SP2", "201617"},
-               {"SP2", "201516"},
                {"E0", "201617"},
                {"D1", "201617"}
              ]
@@ -25,11 +24,11 @@ defmodule FootballApi.DataServer.DataServerTest do
 
   describe "get_by/1" do
     test "returns the list of entries based on the search criteria" do
-      assert DataServer.get_by(div: "SP1", season: "201617") |> length == 380
+      assert DataServer.get_by(div: "SP1", season: "201617") |> length == 1
     end
 
     test "returns all values if no criteria is provided" do
-      assert DataServer.get_by() |> length == 2370
+      assert DataServer.get_by() |> length == 11
     end
 
     test "returns all matches that match query only" do
@@ -42,18 +41,18 @@ defmodule FootballApi.DataServer.DataServerTest do
       match = DataServer.get_by(div: "SP1") |> List.last()
 
       assert %Match{
-               AwayTeam: "Levante",
-               Date: "15/05/16",
+               AwayTeam: "Ath Bilbao",
+               Date: "20/03/16",
                Div: "SP1",
                FTAG: "1",
-               FTHG: "3",
+               FTHG: "2",
                FTR: "H",
-               HTAG: "0",
-               HTHG: "2",
-               HTR: "H",
-               HomeTeam: "Vallecano",
+               HTAG: "1",
+               HTHG: "0",
+               HTR: "A",
+               HomeTeam: "Espanol",
                Season: "201516",
-               id: "760"
+               id: "677"
              } = match
     end
   end
