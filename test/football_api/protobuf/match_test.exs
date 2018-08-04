@@ -21,7 +21,8 @@ defmodule FootballApi.Protobuf.MatchTest do
       id: "1"
     }
 
-    encoded_protobuf = decoded_protobuf |> Map.from_struct |> ProtoMatch.new() |> ProtoMatch.encode()
+    encoded_protobuf =
+      decoded_protobuf |> Map.from_struct() |> ProtoMatch.new() |> ProtoMatch.encode()
 
     %{
       decoded_protobuf: decoded_protobuf,

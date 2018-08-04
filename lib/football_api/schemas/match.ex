@@ -22,8 +22,7 @@ defmodule FootballApi.Schemas.Match do
   end
 
   def new(map \\ %{}) do
-    params = Map.put(map, :id, map[:""])
-    struct(Match, params)
+    struct(Match, map)
   end
 
   def get_by(query \\ []) do
