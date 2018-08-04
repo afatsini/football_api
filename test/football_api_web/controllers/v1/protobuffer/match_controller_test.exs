@@ -93,7 +93,7 @@ defmodule FootballApiWeb.V1.Protobuffer.MatchControllerTest do
       assert Enum.member?(response.resp_headers, {"content-type", "application/x-protobuf"})
       decoded_response = Error.decode(response.resp_body)
 
-      assert decoded_response == %{reason: "no_data_for_query"}
+      assert decoded_response == %{reason: "Not found"}
     end
   end
 end

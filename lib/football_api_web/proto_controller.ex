@@ -9,8 +9,8 @@ defmodule FootballApiWeb.ProtoController do
   def init(default), do: default
 
   @spec call(Conn.t(), any) :: Conn.t()
-  def call(conn, {:error, {:bad_request, errors}}), do: bad_input(conn, errors)
-  def call(conn, {:error, {:not_found, term}}), do: not_found(conn, term)
+  def call(conn, {:error, :bad_request}), do: bad_input(conn)
+  def call(conn, {:error, :not_found}), do: not_found(conn)
   def call(conn, error), do: server_error(conn, error)
 
   @typep reason :: any
