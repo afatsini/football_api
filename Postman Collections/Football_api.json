@@ -308,23 +308,28 @@
                 }
               ],
               "request": {
-                "method": "GET",
+                "method": "POST",
                 "header": [
                   {
                     "key": "Content-Type",
                     "value": "application/x-protobuf"
                   }
                 ],
-                "body": {},
+                "body": {
+                  "mode": "file",
+                  "file": {
+                    "src": null
+                  }
+                },
                 "url": {
-                  "raw": "{{API_URL}}/v1/protobuffer/results",
+                  "raw": "{{API_URL}}/v1/protobuffer/matches",
                   "host": [
                     "{{API_URL}}"
                   ],
                   "path": [
                     "v1",
                     "protobuffer",
-                    "results"
+                    "matches"
                   ],
                   "query": [
                     {
@@ -338,17 +343,21 @@
               },
               "response": [
                 {
-                  "id": "3c277fc8-37ec-49e0-ad8e-d9d100269d32",
-                  "name": "GET matches",
+                  "id": "55fd1522-39bc-4f2a-9cbf-e22da093ad48",
+                  "name": "GET matches with filter",
                   "originalRequest": {
-                    "method": "GET",
+                    "method": "POST",
                     "header": [
                       {
                         "key": "Content-Type",
-                        "value": "application/x-protobuf"
+                        "value": "application/x-protobuf",
+                        "disabled": false
                       }
                     ],
-                    "body": {},
+                    "body": {
+                      "mode": "raw",
+                      "raw": ""
+                    },
                     "url": {
                       "raw": "{{API_URL}}/v1/protobuffer/matches",
                       "host": [
@@ -393,7 +402,7 @@
                     },
                     {
                       "key": "date",
-                      "value": "Sat, 04 Aug 2018 11:29:35 GMT",
+                      "value": "Sat, 04 Aug 2018 11:31:54 GMT",
                       "name": "date",
                       "description": "The date and time that the message was sent"
                     },
