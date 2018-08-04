@@ -1,0 +1,3 @@
+message Error {
+  optional string reason = 1;
+}

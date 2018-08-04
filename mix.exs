@@ -43,7 +43,8 @@ defmodule FootballApi.Mixfile do
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
       {:credo, "~> 0.9", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.9", only: :test},
-      {:exprotobuf, "~> 1.2.9"}
+      {:exprotobuf, "~> 1.2.9"},
+      {:mock, "~> 0.3.0", only: :test}
     ]
   end
 

@@ -1,8 +1,11 @@
 defmodule FootballApiWeb.V1.JsonApi.MatchControllerTest do
   @moduledoc """
     Controller test is used as integration test, going though all
-    the real objects
+    the real objects.
+    Non happy path mocked
   """
+
+  import Mock
 
   use FootballApiWeb.ConnCase
 
@@ -65,5 +68,32 @@ defmodule FootballApiWeb.V1.JsonApi.MatchControllerTest do
       response["data"] |> Enum.map(fn result -> result["attributes"]["Season"] end) |> Enum.uniq()
 
     assert season_filter == value
+  end
+
+  test "return 404 for non-existing params", %{conn: conn} do
+    params = %{season: :inexistent, div: :inexistent}
+
+    response =
+      conn
+      |> get(match_path(conn, :index, params))
+      |> json_response(404)
+
+    assert response == %{"errors" => %{"detail" => "Not Found"}}
+  end
+
+  test "return 400 for validation errors", %{conn: conn} do
+    with_mock FootballApiWeb.Schemas.GetMatches,
+      validate_params: fn _params ->
+        {:error, :bad_request}
+      end do
+      params = %{bad: :request}
+
+      response =
+        conn
+        |> get(match_path(conn, :index, params))
+        |> json_response(400)
+
+      assert response == %{"errors" => %{"detail" => "Bad Request"}}
+    end
   end
 end

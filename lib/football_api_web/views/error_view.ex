@@ -1,10 +1,6 @@
 defmodule FootballApiWeb.ErrorView do
   use FootballApiWeb, :view
 
-  def render("400.json", %{detail: message}) do
-    %{errors: %{detail: message}, code: 400}
-  end
-
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.
   # def render("500.json", _assigns) do

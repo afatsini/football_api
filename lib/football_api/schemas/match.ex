@@ -25,7 +25,30 @@ defmodule FootballApi.Schemas.Match do
     struct(Match, map)
   end
 
-  def get_by(query \\ []) do
-    DataServer.get_by(query)
+  def get_by(query, opts \\ []) do
+    data_server = opts[:data_server] || DataServer
+
+    if key_exist_for_query?(query, data_server) do
+      results = data_server.get_by(query)
+      {:ok, results}
+    else
+      {:error, :not_found}
+    end
+  end
+
+  defp key_exist_for_query?(query, data_server) do
+    case query do
+      %{div: nil} ->
+        true
+
+      %{season: nil} ->
+        true
+
+      _ ->
+        data_server.get_keys()
+        |> Enum.any?(fn {div, season} ->
+          div == query[:div] && season == query[:season]
+        end)
+    end
   end
 end

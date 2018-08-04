@@ -19,8 +19,26 @@ defmodule FootballApi.Schemas.MatchTest do
       id: 12
     }
 
+    defmodule FakeDataServer do
+      def get_by(query) do
+        send(self(), {:query, query})
+      end
+
+      def get_keys() do
+        [
+          {"SP1", "201617"},
+          {"SP1", "201516"},
+          {"SP2", "201617"},
+          {"SP2", "201516"},
+          {"E0", "201617"},
+          {"D1", "201617"}
+        ]
+      end
+    end
+
     %{
-      map: map
+      map: map,
+      data_server: FakeDataServer
     }
   end
 
@@ -44,6 +62,29 @@ defmodule FootballApi.Schemas.MatchTest do
                Season: "201516",
                id: 12
              }
+    end
+  end
+
+  describe "get_by/1" do
+    test "query dataserver if some params are empty", %{data_server: data_server} do
+      params = %{div: nil, season: :inexistent}
+      Match.get_by(params, data_server: data_server)
+
+      assert_received({:query, params})
+    end
+
+    test "query dataserver if parms are in key list", %{data_server: data_server} do
+      params = %{div: "SP1", season: "201617"}
+      Match.get_by(params, data_server: data_server)
+
+      assert_received({:query, params})
+    end
+
+    test "do NOT query dataserver if parms are NOT in key list", %{data_server: data_server} do
+      params = %{div: "SP1", season: :inexistent}
+      Match.get_by(params, data_server: data_server)
+
+      refute_received({:query, _})
     end
   end
 end
