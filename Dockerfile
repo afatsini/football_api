@@ -12,6 +12,12 @@ RUN mix local.hex --force && mix local.rebar --force
 # Copy the contents
 COPY . /app/
 
+#set project to run in PROD env
+ENV MIX_ENV=prod
+
+#set application port
+ENV PORT=4000
+
 # Compile
 RUN mix deps.get
 RUN mix deps.compile
