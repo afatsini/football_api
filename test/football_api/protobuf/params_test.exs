@@ -1,8 +1,7 @@
-defmodule FootballApi.Protobuf.ProParamsTest do
+defmodule FootballApi.Protobuf.ParamsTest do
   use ExUnit.Case, async: true
 
-  alias FootballApi.Protobuf.ProtoParams
-  alias FootballApi.Protobuf.ProtoParams.Params
+  alias FootballApi.Protobuf.Params
 
   setup do
     params_map = %{
@@ -15,7 +14,7 @@ defmodule FootballApi.Protobuf.ProParamsTest do
       season: "201516"
     }
 
-    encoded_protobuf = params_map |> Params.new() |> Params.encode()
+    encoded_protobuf = params_map |> Params.Params.new() |> Params.Params.encode()
 
     %{
       params_map: params_map,
@@ -29,7 +28,7 @@ defmodule FootballApi.Protobuf.ProParamsTest do
       params_map: params_map,
       encoded_protobuf: encoded_protobuf
     } do
-      encoded = ProtoParams.encode(params_map)
+      encoded = Params.encode(params_map)
 
       assert encoded == encoded_protobuf
     end
@@ -40,7 +39,7 @@ defmodule FootballApi.Protobuf.ProParamsTest do
       decoded_protobuf: decoded_protobuf,
       encoded_protobuf: encoded_protobuf
     } do
-      decoded_pb = ProtoParams.decode(encoded_protobuf)
+      decoded_pb = Params.decode(encoded_protobuf)
 
       assert decoded_protobuf == decoded_pb
     end

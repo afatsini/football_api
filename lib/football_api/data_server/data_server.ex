@@ -5,6 +5,8 @@ defmodule FootballApi.DataServer do
 
   use GenServer
 
+  alias FootballApi.Schemas.Match
+
   @data_path Application.get_env(:football_api, FootballApi.DataServer)[:data_path]
   @table_name Application.get_env(:football_api, FootballApi.DataServer)[:table_name]
 
@@ -25,27 +27,6 @@ defmodule FootballApi.DataServer do
 
   @doc """
   get the values based on the query provided
-
-   ## Examples
-
-      iex> GenServer.get_by(div: "SP1", season: "201617")
-      [%{
-       "" => "1",
-       "AwayTeam" => "Eibar",
-       "Date" => "19/08/16",
-       "Div" => "SP1",
-       "FTAG" => "1",
-       "FTHG" => "2",
-       "FTR" => "H",
-       "HTAG" => "0",
-       "HTHG" => "0",
-       "HTR" => "D",
-       "HomeTeam" => "La Coruna",
-       "Season" => "201617"
-      },
-      %{...},
-      %{...},
-      ...]
   """
   def get_by(query \\ []) do
     GenServer.call(__MODULE__, {:get_by, query})
@@ -55,7 +36,7 @@ defmodule FootballApi.DataServer do
   def init(_) do
     initialize_ets_table()
 
-    keys = store_entries(data_hash())
+    keys = store_matches(matches())
 
     {:ok, keys}
   end
@@ -73,13 +54,23 @@ defmodule FootballApi.DataServer do
     {:reply, result, state}
   end
 
-  defp data_hash do
+  defp matches do
     "#{File.cwd!()}/#{@data_path}"
     |> Path.expand(__DIR__)
     |> File.stream!()
     |> CSV.decode!(headers: true)
     |> Enum.map(fn line ->
-      line |> Enum.into(%{}, fn {key, value} -> {String.to_atom(key), value} end)
+      line
+      |> Enum.into(%{}, fn {key, value} ->
+        key =
+          case key do
+            "" -> "id"
+            key -> key
+          end
+
+        {String.to_atom(key), value}
+      end)
+      |> Match.new()
     end)
   end
 
@@ -87,17 +78,20 @@ defmodule FootballApi.DataServer do
     :ets.new(@table_name, [:named_table, :public, :bag])
   end
 
-  defp store_entries(entries) do
-    entries
-    |> Enum.map(fn entry ->
-      key = build_key(entry)
-      :ets.insert(@table_name, {key, entry})
+  defp store_matches(matches) do
+    matches
+    |> Enum.map(fn match ->
+      key = build_key(match)
+      :ets.insert(@table_name, {key, match})
       key
     end)
     |> Enum.uniq()
   end
 
   defp build_key(entry) do
-    {entry[:Div], entry[:Season]}
+    div = Map.get(entry, :Div)
+    season = Map.get(entry, :Season)
+
+    {div, season}
   end
 end

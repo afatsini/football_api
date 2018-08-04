@@ -1,11 +1,12 @@
-defmodule FootballApi.Protobuf.ProtobufTest do
+defmodule FootballApi.Protobuf.MatchTest do
   use ExUnit.Case, async: true
 
-  alias FootballApi.Protobuf.Protobuf
-  alias FootballApi.Protobuf.Protobuf.Result
+  alias FootballApi.Protobuf.Match
+  alias FootballApi.Protobuf.Match.Match, as: ProtoMatch
+  alias FootballApi.Schemas.Match, as: MatchObject
 
   setup do
-    decoded_protobuf = %{
+    decoded_protobuf = %MatchObject{
       AwayTeam: "Mallorca",
       Date: "22/08/15",
       Div: "SP2",
@@ -16,10 +17,12 @@ defmodule FootballApi.Protobuf.ProtobufTest do
       HTHG: "1",
       HTR: "H",
       HomeTeam: "Alcorcon",
-      Season: "201516"
+      Season: "201516",
+      id: "1"
     }
 
-    encoded_protobuf = decoded_protobuf |> Result.new() |> Result.encode()
+    encoded_protobuf =
+      decoded_protobuf |> Map.from_struct() |> ProtoMatch.new() |> ProtoMatch.encode()
 
     %{
       decoded_protobuf: decoded_protobuf,
@@ -32,7 +35,7 @@ defmodule FootballApi.Protobuf.ProtobufTest do
       decoded_protobuf: decoded_protobuf,
       encoded_protobuf: encoded_protobuf
     } do
-      encoded = Protobuf.encode(decoded_protobuf)
+      encoded = Match.encode(decoded_protobuf)
 
       assert encoded == encoded_protobuf
     end
@@ -42,7 +45,7 @@ defmodule FootballApi.Protobuf.ProtobufTest do
       encoded_protobuf: encoded_protobuf
     } do
       list_of_maps = [decoded_protobuf, decoded_protobuf, decoded_protobuf]
-      encoded = Protobuf.encode(list_of_maps)
+      encoded = Match.encode(list_of_maps)
 
       Enum.each(encoded, fn result -> result == encoded_protobuf end)
     end
@@ -53,7 +56,7 @@ defmodule FootballApi.Protobuf.ProtobufTest do
       decoded_protobuf: decoded_protobuf,
       encoded_protobuf: encoded_protobuf
     } do
-      decoded_pb = Protobuf.decode(encoded_protobuf)
+      decoded_pb = Match.decode(encoded_protobuf)
 
       assert decoded_protobuf == decoded_pb
     end

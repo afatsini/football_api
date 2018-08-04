@@ -1,6 +1,6 @@
-defmodule FootballApi.Schemas.GetResults do
+defmodule FootballApiWeb.Schemas.GetMatches do
   @moduledoc """
-    Parameter filter for get results action.
+    Parameter filter for get Matches action.
   """
 
   use Ecto.Schema
@@ -25,7 +25,7 @@ defmodule FootballApi.Schemas.GetResults do
   end
 
   defp changeset(params) do
-    %GetResults{}
+    %GetMatches{}
     |> cast(params, @allowed_fields)
     |> validate_required(@required_fields)
   end

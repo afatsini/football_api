@@ -2,6 +2,7 @@ defmodule FootballApi.DataServer.DataServerTest do
   use ExUnit.Case, async: true
 
   alias FootballApi.DataServer
+  alias FootballApi.Schemas.Match
 
   describe "start_link/1" do
     test "Server starts automatically when starting the project" do
@@ -31,29 +32,29 @@ defmodule FootballApi.DataServer.DataServerTest do
       assert DataServer.get_by() |> length == 2370
     end
 
-    test "filter with only one criteria returns all matches with the given criteria only" do
+    test "returns all matches that match query only" do
       assert DataServer.get_by(div: "SP1")
-             |> Enum.map(fn entry -> entry[:Div] end)
+             |> Enum.map(fn entry -> Map.get(entry, :Div) end)
              |> Enum.uniq() == ["SP1"]
     end
 
-    test "check the format of the entries" do
-      entry = DataServer.get_by(div: "SP1") |> List.last()
+    test "check the format of the stored match" do
+      match = DataServer.get_by(div: "SP1") |> List.last()
 
-      assert %{
-               :"" => _,
-               :AwayTeam => _,
-               :Date => _,
-               :Div => _,
-               :FTAG => _,
-               :FTHG => _,
-               :FTR => _,
-               :HTAG => _,
-               :HTHG => _,
-               :HTR => _,
-               :HomeTeam => _,
-               :Season => _
-             } = entry
+      assert %Match{
+               AwayTeam: "Levante",
+               Date: "15/05/16",
+               Div: "SP1",
+               FTAG: "1",
+               FTHG: "3",
+               FTR: "H",
+               HTAG: "0",
+               HTHG: "2",
+               HTR: "H",
+               HomeTeam: "Vallecano",
+               Season: "201516",
+               id: "760"
+             } = match
     end
   end
 end
