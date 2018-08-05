@@ -262,7 +262,7 @@
                 ],
                 "body": {},
                 "url": {
-                  "raw": "{{API_URL}}/v1/json-api/matches?div=SP1&season=201617",
+                  "raw": "{{API_URL}}/v1/json-api/matches?id=1",
                   "host": [
                     "{{API_URL}}"
                   ],
@@ -273,16 +273,9 @@
                   ],
                   "query": [
                     {
-                      "key": "div",
-                      "value": "SP1",
-                      "equals": true,
-                      "description": "filter by division"
-                    },
-                    {
-                      "key": "season",
-                      "value": "201617",
-                      "equals": true,
-                      "description": "filter by season"
+                      "key": "id",
+                      "value": "1",
+                      "equals": true
                     }
                   ]
                 }
