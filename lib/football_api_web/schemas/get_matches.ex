@@ -7,7 +7,7 @@ defmodule FootballApiWeb.Schemas.GetMatches do
   import Ecto.Changeset
   alias __MODULE__
 
-  @allowed_fields ~w(div season)a
+  @allowed_fields ~w(div season id)a
   @required_fields ~w()a
 
   embedded_schema do

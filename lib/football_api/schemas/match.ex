@@ -38,7 +38,7 @@ defmodule FootballApi.Schemas.Match do
     data_server = opts[:data_server] || DataServer
 
     case data_server.get(id) do
-      [] -> {:error, :not_found}
+      nil -> {:error, :not_found}
       result -> {:ok, result}
     end
   end

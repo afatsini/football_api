@@ -17,6 +17,7 @@ defmodule FootballApiWeb.Router do
     pipe_through(:jsonapi)
 
     get("/matches", MatchController, :index)
+    get("/matches/:id", MatchController, :show)
   end
 
   scope "/v1/protobuffer", FootballApiWeb.V1.Protobuffer do

@@ -30,7 +30,10 @@ defmodule FootballApi.DataServer do
   """
   def get(id) do
     query = [id: id]
-    GenServer.call(__MODULE__, {:get_by, query})
+
+    __MODULE__
+    |> GenServer.call({:get_by, query})
+    |> List.first()
   end
 
   # Callbacks
