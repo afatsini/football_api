@@ -232,7 +232,7 @@
             },
             {
               "_postman_id": "e967b6b3-e5d2-4ed1-974e-828fec7ecfd0",
-              "name": "GET matches Copy",
+              "name": "GET match",
               "event": [
                 {
                   "listen": "test",
