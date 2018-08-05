@@ -114,8 +114,13 @@ iex(3)> IO.binwrite file, encoded_params
 ```
 
 ## Logging
-All the logs are sent to PaperTrail.
-The PaparTrail destinatin is configured using the doker-compose.
+All the application logs are sent to PaperTrail.
+The PaparTrail api url is configured using the docker-compose.
+
+The container metrics are sent to DataDog.
+In order to have the metrics sent you need to have the env var `DD_API_KEY` set:
+
+`export DD_API_KEY=XXXXXXX`
 
 
 ## Expose to the internet
