@@ -21,6 +21,7 @@ defmodule FootballApi.DataServer do
   @doc """
   get the values based on the query provided
   """
+  @spec get_by(list) :: list
   def get_by(query \\ []) do
     GenServer.call(__MODULE__, {:get_by, query})
   end
@@ -28,6 +29,7 @@ defmodule FootballApi.DataServer do
   @doc """
   get by id
   """
+  @spec get(integer) :: struct | nil
   def get(id) do
     query = [id: id]
 

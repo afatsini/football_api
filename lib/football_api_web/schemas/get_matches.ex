@@ -15,6 +15,7 @@ defmodule FootballApiWeb.Schemas.GetMatches do
     field(:season, :string)
   end
 
+  @spec validate_params(map) :: {:error, :bad_request} | {:ok, struct}
   def validate_params(params) do
     changeset = changeset(params)
 
