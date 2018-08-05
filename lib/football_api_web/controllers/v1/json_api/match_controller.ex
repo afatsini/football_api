@@ -11,11 +11,14 @@ defmodule FootballApiWeb.V1.JsonApi.MatchController do
 
   alias FootballApi.Schemas.Match
   alias FootballApiWeb.Schemas.GetMatches
+  alias FootballApiWeb.Schemas.Paginator
 
   def index(conn, params) do
     with {:ok, schema} <- GetMatches.validate_params(params),
          query <- Map.from_struct(schema),
-         {:ok, results} <- Match.get_by(query) do
+         {:ok, all_results} <- Match.get_by(query),
+         {:ok, pagination} <- Paginator.validate_params(params),
+         results = all_results |> Paginator.paginate(pagination) do
       render(conn, "index.json-api", data: results)
     else
       error -> error

@@ -141,7 +141,7 @@ Forwarding                    https://561492fc.ngrok.io -> 127.0.0.1:80
 In this case, the project will be accessible from `https://561492fc.ngrok.io`
 
 ## How to improve the solution
-- Needs pagination.
+- lazy load pagination.
 - Create alternative dataServer implementation and check performance.
 - Add endpoints to insert / delete data.
 - Create deploy script.

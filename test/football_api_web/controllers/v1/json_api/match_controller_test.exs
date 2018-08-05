@@ -41,6 +41,58 @@ defmodule FootballApiWeb.V1.JsonApi.MatchControllerTest do
       } = response
     end
 
+    test "paginates the result when no pagination parameters are given", %{conn: conn} do
+      response =
+        conn
+        |> get(match_path(conn, :index))
+        |> json_response(200)
+
+      %{
+        "links" => %{
+          "last" => "/v1/json-api/matches?page[number]=2&page[size]=10",
+          "next" => "/v1/json-api/matches?page[number]=2&page[size]=10",
+          "self" => "/v1/json-api/matches?page[number]=1&page[size]=10"
+        }
+      } = response
+    end
+
+    test "paginates the result with pagination parameters", %{conn: conn} do
+      response =
+        conn
+        |> get(match_path(conn, :index, page_size: 1, page_number: 2))
+        |> json_response(200)
+
+      %{
+        "data" => [
+          %{
+            "attributes" => %{
+              "AwayTeam" => "Werder Bremen",
+              "Date" => "07/04/17",
+              "Div" => "D1",
+              "FTAG" => "2",
+              "FTHG" => "2",
+              "FTR" => "D",
+              "HTAG" => "2",
+              "HTHG" => "0",
+              "HTR" => "A",
+              "HomeTeam" => "Ein Frankfurt",
+              "Season" => "201617"
+            },
+            "id" => "2308",
+            "type" => "match"
+          }
+        ],
+        "jsonapi" => %{"version" => "1.0"},
+        "links" => %{
+          "first" => "/v1/json-api/matches?page[number]=1&page[size]=1&page_number=2&page_size=1",
+          "last" => "/v1/json-api/matches?page[number]=11&page[size]=1&page_number=2&page_size=1",
+          "next" => "/v1/json-api/matches?page[number]=3&page[size]=1&page_number=2&page_size=1",
+          "prev" => "/v1/json-api/matches?page[number]=1&page[size]=1&page_number=2&page_size=1",
+          "self" => "/v1/json-api/matches?page[number]=2&page[size]=1&page_number=2&page_size=1"
+        }
+      } = response
+    end
+
     test "return results filtered by div param", %{conn: conn} do
       value = "SP1"
 

@@ -45,7 +45,8 @@ defmodule FootballApi.Mixfile do
       {:excoveralls, "~> 0.9", only: :test},
       {:exprotobuf, "~> 1.2.9"},
       {:mock, "~> 0.3.0", only: :test},
-      {:plug_logger_json, "~> 0.6.0"}
+      {:plug_logger_json, "~> 0.6.0"},
+      {:scrivener_list, "~> 1.0"}
     ]
   end
 
