@@ -10,18 +10,6 @@ defmodule FootballApi.DataServer.DataServerTest do
     end
   end
 
-  describe "get_keys/0" do
-    test "returns unique list of keys identiying stored data" do
-      assert DataServer.get_keys() == [
-               {"SP1", "201617"},
-               {"SP1", "201516"},
-               {"SP2", "201617"},
-               {"E0", "201617"},
-               {"D1", "201617"}
-             ]
-    end
-  end
-
   describe "get_by/1" do
     test "returns the list of entries based on the search criteria" do
       assert DataServer.get_by(div: "SP1", season: "201617") |> length == 1
