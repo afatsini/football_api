@@ -7,7 +7,7 @@ defmodule FootballApiWeb.Endpoint do
     plug(Phoenix.CodeReloader)
   end
 
-  plug(Plug.Logger)
+  plug(Plug.LoggerJSON, log: Logger.level())
 
   plug(
     Plug.Parsers,

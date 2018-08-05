@@ -2,8 +2,13 @@ version: '3.1'
 services:
   football-api:
     build: .
-    image: afatsini/football-api
+    image: afatsini/football-api:latest
     restart: always
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "udp://logs7.papertrailapp.com:17766"
+        tag: "{{.Name}}/{{.ID}}"
     environment:
      - SERVICE_PORTS=4000
     networks:

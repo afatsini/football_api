@@ -22,7 +22,7 @@ defmodule FootballApi.Mixfile do
   def application do
     [
       mod: {FootballApi.Application, []},
-      extra_applications: [:logger, :runtime_tools, :exprotobuf]
+      extra_applications: [:logger, :runtime_tools, :exprotobuf, :plug_logger_json]
     ]
   end
 
@@ -44,7 +44,8 @@ defmodule FootballApi.Mixfile do
       {:credo, "~> 0.9", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.9", only: :test},
       {:exprotobuf, "~> 1.2.9"},
-      {:mock, "~> 0.3.0", only: :test}
+      {:mock, "~> 0.3.0", only: :test},
+      {:plug_logger_json, "~> 0.6.0"}
     ]
   end
 

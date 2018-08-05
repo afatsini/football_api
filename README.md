@@ -111,3 +111,21 @@ iex(2) > {:ok, file} = File.open "somefile", [:write]
 iex(3)> IO.binwrite file, encoded_params
 :ok
 ```
+
+## Logging
+All the logs are sent to PaperTrail.
+The PaparTrail destinatin is configured using the doker-compose.
+
+
+## Expose to the internet
+To access the stack deployed from the internet, you can use: (binary is for mac only)
+
+`bin/ngrok http 127.0.0.1:80`
+
+this command will return an output containing `Forwardning`, like:
+
+```
+Forwarding                    https://561492fc.ngrok.io -> 127.0.0.1:80
+```
+
+In this case, the project will be accessible from `https://561492fc.ngrok.io`
