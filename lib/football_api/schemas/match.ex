@@ -37,18 +37,21 @@ defmodule FootballApi.Schemas.Match do
   end
 
   defp key_exist_for_query?(query, data_server) do
-    case query do
-      %{div: nil} ->
-        true
+    search_query =
+      case query do
+        %{div: nil, season: nil} ->
+          fn _ -> true end
 
-      %{season: nil} ->
-        true
+        %{div: nil} ->
+          fn {_div, season} -> season == query[:season] end
 
-      _ ->
-        data_server.get_keys()
-        |> Enum.any?(fn {div, season} ->
-          div == query[:div] && season == query[:season]
-        end)
-    end
+        %{season: nil} ->
+          fn {div, _season} -> div == query[:div] end
+
+        _ ->
+          fn {div, season} -> div == query[:div] && season == query[:season] end
+      end
+
+    data_server.get_keys() |> Enum.any?(&search_query.(&1))
   end
 end

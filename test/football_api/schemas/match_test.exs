@@ -66,23 +66,36 @@ defmodule FootballApi.Schemas.MatchTest do
   end
 
   describe "get_by/1" do
-    test "query dataserver if some params are empty", %{data_server: data_server} do
-      params = %{div: nil, season: :inexistent}
-      Match.get_by(params, data_server: data_server)
+    test "query dataserver if params are nil", %{data_server: data_server} do
+      params = %{div: nil, season: nil}
+
+      assert {:ok, {:query, %{div: nil, season: nil}}} =
+               Match.get_by(params, data_server: data_server)
+
+      assert_received({:query, params})
+    end
+
+    test "query dataserver if one param is nil", %{data_server: data_server} do
+      params = %{div: "SP1", season: nil}
+
+      assert {:ok, {:query, %{div: "SP1", season: nil}}} =
+               Match.get_by(params, data_server: data_server)
 
       assert_received({:query, params})
     end
 
     test "query dataserver if parms are in key list", %{data_server: data_server} do
       params = %{div: "SP1", season: "201617"}
-      Match.get_by(params, data_server: data_server)
+
+      assert {:ok, {:query, %{div: "SP1", season: "201617"}}} =
+               Match.get_by(params, data_server: data_server)
 
       assert_received({:query, params})
     end
 
     test "do NOT query dataserver if parms are NOT in key list", %{data_server: data_server} do
       params = %{div: "SP1", season: :inexistent}
-      Match.get_by(params, data_server: data_server)
+      assert {:error, :not_found} = Match.get_by(params, data_server: data_server)
 
       refute_received({:query, _})
     end
