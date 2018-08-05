@@ -2,4 +2,6 @@ message Params {
   optional string id = 1;
   optional string div = 2;
   optional string season = 3;
+  optional int32 page_number = 4;
+  optional int32 page_size = 5;
 }

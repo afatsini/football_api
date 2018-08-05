@@ -105,6 +105,7 @@ parameters:
 - **div_SP1_param**: contains the parameter %{div: "SP1"}
 - **div_SP1_season_201617_param**: contains the parameter %{div: "SP1", season: "201617"}
 - **id_1**: contains the parameter %{id: "1"}
+- **param_req**: contains the parameter %{div: "SP1", season: "201617", page_number: 2, page_size: 5}
 
 you can generate more examples using the iex console:
 

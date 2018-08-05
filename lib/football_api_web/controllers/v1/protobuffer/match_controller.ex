@@ -12,6 +12,7 @@ defmodule FootballApiWeb.V1.Protobuffer.MatchController do
   alias FootballApi.Schemas.Match
   alias FootballApi.Protobuf
   alias FootballApiWeb.Schemas.GetMatches
+  alias FootballApiWeb.Schemas.Paginator
 
   def index(conn, _params) do
     {:ok, body_params, _} = read_body(conn)
@@ -19,8 +20,10 @@ defmodule FootballApiWeb.V1.Protobuffer.MatchController do
     with decoded_params <- Protobuf.Params.decode(body_params),
          {:ok, schema} <- GetMatches.validate_params(decoded_params),
          query <- Map.from_struct(schema),
-         {:ok, results} <- Match.get_by(query),
-         encoded_results <- Protobuf.Match.encode(results) do
+         {:ok, all_results} <- Match.get_by(query),
+         {:ok, pagination} <- Paginator.validate_params(decoded_params),
+         results <- Paginator.paginate(all_results, pagination),
+         encoded_results <- Protobuf.Match.encode(results.entries) do
       conn
       |> put_resp_header("content-type", "application/x-protobuf")
       |> send_resp(200, encoded_results)

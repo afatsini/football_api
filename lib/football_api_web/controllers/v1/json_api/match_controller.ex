@@ -18,7 +18,7 @@ defmodule FootballApiWeb.V1.JsonApi.MatchController do
          query <- Map.from_struct(schema),
          {:ok, all_results} <- Match.get_by(query),
          {:ok, pagination} <- Paginator.validate_params(params),
-         results = all_results |> Paginator.paginate(pagination) do
+         results <- Paginator.paginate(all_results, pagination) do
       render(conn, "index.json-api", data: results)
     else
       error -> error

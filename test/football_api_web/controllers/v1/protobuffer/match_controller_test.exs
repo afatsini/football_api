@@ -96,6 +96,33 @@ defmodule FootballApiWeb.V1.Protobuffer.MatchControllerTest do
       assert Map.get(decoded_body, :id) == "1"
     end
 
+    test "paginates the result with pagination parameters", %{conn: conn} do
+      params = %{page_size: 1, page_number: 3}
+      encoded_params = params |> Params.Params.new() |> Params.Params.encode()
+
+      response =
+        conn
+        |> put_req_header("content-type", "application/x-protobuf")
+        |> post("/v1/protobuffer/matches", encoded_params)
+
+      decoded_body = Match.decode(response.resp_body)
+
+      assert %FootballApi.Schemas.Match{
+               HTR: "H",
+               Season: "201617",
+               AwayTeam: "Vallecano",
+               Date: "20/08/16",
+               Div: "SP2",
+               FTAG: "1",
+               FTHG: "2",
+               FTR: "H",
+               HTAG: "1",
+               HTHG: "2",
+               HomeTeam: "Elche",
+               id: "765"
+             } == decoded_body
+    end
+
     test "return 404 for non-existing params", %{conn: conn} do
       params = %{season: "inexistent", div: "inexistent"}
       encoded_params = params |> Params.Params.new() |> Params.Params.encode()
