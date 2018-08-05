@@ -1,4 +1,5 @@
 message Params {
-  optional string div = 1;
-  optional string season = 2;
+  optional string id = 1;
+  optional string div = 2;
+  optional string season = 3;
 }
