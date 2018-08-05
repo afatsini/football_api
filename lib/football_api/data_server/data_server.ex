@@ -19,16 +19,17 @@ defmodule FootballApi.DataServer do
   end
 
   @doc """
-  get the uniq keys of the values stored by the data server
-  """
-  def get_keys do
-    GenServer.call(__MODULE__, :get_keys)
-  end
-
-  @doc """
   get the values based on the query provided
   """
   def get_by(query \\ []) do
+    GenServer.call(__MODULE__, {:get_by, query})
+  end
+
+  @doc """
+  get by id
+  """
+  def get(id) do
+    query = [id: id]
     GenServer.call(__MODULE__, {:get_by, query})
   end
 
@@ -36,19 +37,15 @@ defmodule FootballApi.DataServer do
   def init(_) do
     initialize_ets_table()
 
-    keys = store_matches(matches())
+    store_matches(matches())
 
-    {:ok, keys}
-  end
-
-  def handle_call(:get_keys, _from, state) do
-    {:reply, state, state}
+    {:ok, :success}
   end
 
   def handle_call({:get_by, query}, _from, state) do
     result =
       @table_name
-      |> :ets.match({{query[:div] || :_, query[:season] || :_}, :"$1"})
+      |> :ets.match({{query[:id] || :_, query[:div] || :_, query[:season] || :_}, :"$1"})
       |> List.flatten()
 
     {:reply, result, state}
@@ -85,13 +82,13 @@ defmodule FootballApi.DataServer do
       :ets.insert(@table_name, {key, match})
       key
     end)
-    |> Enum.uniq()
   end
 
   defp build_key(entry) do
+    id = Map.get(entry, :id)
     div = Map.get(entry, :Div)
     season = Map.get(entry, :Season)
 
-    {div, season}
+    {id, div, season}
   end
 end

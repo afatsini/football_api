@@ -19,26 +19,8 @@ defmodule FootballApi.Schemas.MatchTest do
       id: 12
     }
 
-    defmodule FakeDataServer do
-      def get_by(query) do
-        send(self(), {:query, query})
-      end
-
-      def get_keys() do
-        [
-          {"SP1", "201617"},
-          {"SP1", "201516"},
-          {"SP2", "201617"},
-          {"SP2", "201516"},
-          {"E0", "201617"},
-          {"D1", "201617"}
-        ]
-      end
-    end
-
     %{
-      map: map,
-      data_server: FakeDataServer
+      map: map
     }
   end
 
@@ -66,38 +48,84 @@ defmodule FootballApi.Schemas.MatchTest do
   end
 
   describe "get_by/1" do
-    test "query dataserver if params are nil", %{data_server: data_server} do
-      params = %{div: nil, season: nil}
+    input_params = [
+      {nil, nil},
+      {"SP1", nil},
+      {"SP1", "201617"},
+      {nil, :inexistent}
+    ]
 
-      assert {:ok, {:query, %{div: nil, season: nil}}} =
-               Match.get_by(params, data_server: data_server)
+    setup do
+      defmodule FakeDataServer do
+        def get_by(query) do
+          send(self(), {:get_by, query})
+        end
 
-      assert_received({:query, params})
+        def get(id) do
+          send(self(), {:get, id})
+        end
+      end
+
+      %{data_server: FakeDataServer}
     end
 
-    test "query dataserver if one param is nil", %{data_server: data_server} do
-      params = %{div: "SP1", season: nil}
+    Enum.each(input_params, fn query ->
+      test "query #{inspect(query)} are send to dataserver", %{data_server: data_server} do
+        {div, season} = unquote(query)
+        params = %{div: div, season: season}
 
-      assert {:ok, {:query, %{div: "SP1", season: nil}}} =
-               Match.get_by(params, data_server: data_server)
+        Match.get_by(params, data_server: data_server)
 
-      assert_received({:query, params})
-    end
+        assert_received({:get_by, params})
+      end
+    end)
 
-    test "query dataserver if parms are in key list", %{data_server: data_server} do
+    test "resturns {:ok, result_list} format" do
       params = %{div: "SP1", season: "201617"}
 
-      assert {:ok, {:query, %{div: "SP1", season: "201617"}}} =
-               Match.get_by(params, data_server: data_server)
+      assert {:ok,
+              [
+                %FootballApi.Schemas.Match{
+                  AwayTeam: "Eibar",
+                  Date: "19/08/16",
+                  Div: "SP1",
+                  FTAG: "1",
+                  FTHG: "2",
+                  FTR: "H",
+                  HTAG: "0",
+                  HTHG: "0",
+                  HTR: "D",
+                  HomeTeam: "La Coruna",
+                  Season: "201617",
+                  id: "1"
+                }
+              ]} = Match.get_by(params)
+    end
+  end
 
-      assert_received({:query, params})
+  describe "get/1" do
+    test "get by inexistent id" do
+      assert {:error, :not_found} = Match.get(:inexistent)
     end
 
-    test "do NOT query dataserver if parms are NOT in key list", %{data_server: data_server} do
-      params = %{div: "SP1", season: :inexistent}
-      assert {:error, :not_found} = Match.get_by(params, data_server: data_server)
-
-      refute_received({:query, _})
+    test "get by existing id" do
+      assert {:ok,
+              [
+                %FootballApi.Schemas.Match{
+                  AwayTeam: "Eibar",
+                  Date: "19/08/16",
+                  Div: "SP1",
+                  FTAG: "1",
+                  FTHG: "2",
+                  FTR: "H",
+                  HTAG: "0",
+                  HTHG: "0",
+                  HTR: "D",
+                  HomeTeam: "La Coruna",
+                  Season: "201617",
+                  id: "1"
+                }
+              ]} = Match.get("1")
     end
   end
 end
