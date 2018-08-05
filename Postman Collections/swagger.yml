@@ -24,13 +24,25 @@ paths:
           in: query
           required: false
           type: string
-          description: ''
+          description: 'Division filter'
         - name: season
           in: query
           required: false
           type: string
+          format: string
+          description: 'Season filter'
+        - name: page_number
+          in: query
+          required: false
+          type: int32
           format: int32
-          description: ''
+          description: 'Pagination page number'
+        - name: page_size
+          in: query
+          required: false
+          type: int32
+          format: int32
+          description: 'Pagination page size'
         - name: Content-Type
           in: header
           required: true
