@@ -39,7 +39,7 @@ defmodule FootballApiWeb.Schemas.Paginator do
     default_config(params)
   end
 
-  defp default_config(%{page_number: page_number, page_size: page_size} = params) do
+  defp default_config(%{page_number: page_number, page_size: page_size}) do
     %Scrivener.Config{page_number: page_number || 1, page_size: page_size || 10}
   end
 end
