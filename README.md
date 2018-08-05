@@ -58,6 +58,10 @@ With this command we increase the football-api instance to 5.
 We can check it running the `docker service ls`.
 That should print that we are running 5 replicas.
 
+### Leave swarm mode
+To turn off swarm mode, the fastest way is to run:
+`docker swarm leave --force`
+
 ### More settings
 All the swarm settings can be edited via docker-compose.yml file.
 
@@ -135,3 +139,10 @@ Forwarding                    https://561492fc.ngrok.io -> 127.0.0.1:80
 ```
 
 In this case, the project will be accessible from `https://561492fc.ngrok.io`
+
+## How to improve the solution
+- Needs pagination.
+- Create alternative dataServer implementation and check performance.
+- Add endpoints to insert / delete data.
+- Create deploy script.
+- Create DataDog dashboards to check performance.
