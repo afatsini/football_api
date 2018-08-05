@@ -15,6 +15,7 @@ defmodule FootballApiWeb.Schemas.Paginator do
     field(:page_size, :integer)
   end
 
+  @spec validate_params(map) :: {:error, :bad_request} | {:ok, struct}
   def validate_params(params) do
     changeset = changeset(params)
 
@@ -24,6 +25,7 @@ defmodule FootballApiWeb.Schemas.Paginator do
     end
   end
 
+  @spec paginate(list, struct) :: struct
   def paginate(list, config) do
     Scrivener.paginate(list, config)
   end
