@@ -36,6 +36,16 @@ services:
         placement:
           constraints:
             - node.role == manager
+  datadog:
+    image: datadog/agent:latest
+    networks:
+      - web
+    environment:
+      - DD_API_KEY
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
 
 networks:
   web:
