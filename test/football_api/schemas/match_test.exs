@@ -110,22 +110,20 @@ defmodule FootballApi.Schemas.MatchTest do
 
     test "get by existing id" do
       assert {:ok,
-              [
-                %FootballApi.Schemas.Match{
-                  AwayTeam: "Eibar",
-                  Date: "19/08/16",
-                  Div: "SP1",
-                  FTAG: "1",
-                  FTHG: "2",
-                  FTR: "H",
-                  HTAG: "0",
-                  HTHG: "0",
-                  HTR: "D",
-                  HomeTeam: "La Coruna",
-                  Season: "201617",
-                  id: "1"
-                }
-              ]} = Match.get("1")
+              %FootballApi.Schemas.Match{
+                AwayTeam: "Eibar",
+                Date: "19/08/16",
+                Div: "SP1",
+                FTAG: "1",
+                FTHG: "2",
+                FTR: "H",
+                HTAG: "0",
+                HTHG: "0",
+                HTR: "D",
+                HomeTeam: "La Coruna",
+                Season: "201617",
+                id: "1"
+              }} = Match.get("1")
     end
   end
 end
