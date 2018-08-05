@@ -82,6 +82,20 @@ defmodule FootballApiWeb.V1.Protobuffer.MatchControllerTest do
       assert Map.get(decoded_body, :Season) == "201617"
     end
 
+    test "return single match searchin by id", %{conn: conn} do
+      params = %{id: "1"}
+      encoded_params = params |> Params.Params.new() |> Params.Params.encode()
+
+      response =
+        conn
+        |> put_req_header("content-type", "application/x-protobuf")
+        |> post("/v1/protobuffer/matches", encoded_params)
+
+      decoded_body = Match.decode(response.resp_body)
+
+      assert Map.get(decoded_body, :id) == "1"
+    end
+
     test "return 404 for non-existing params", %{conn: conn} do
       params = %{season: "inexistent", div: "inexistent"}
       encoded_params = params |> Params.Params.new() |> Params.Params.encode()

@@ -6,12 +6,14 @@ defmodule FootballApi.Protobuf.ParamsTest do
   setup do
     params_map = %{
       div: "SP2",
-      season: "201516"
+      season: "201516",
+      id: "1"
     }
 
     decoded_protobuf = %{
       div: "SP2",
-      season: "201516"
+      season: "201516",
+      id: "1"
     }
 
     encoded_protobuf = params_map |> Params.Params.new() |> Params.Params.encode()
