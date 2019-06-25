@@ -10,7 +10,7 @@ pipeline {
   stages {
     stage("Build") {
       steps {
-        sh "MIX_ENV=test mix do deps.get, deps.compile"
+        sh "MIX_ENV=test mix local.hex --force && mix local.rebar --force && mix do deps.get, deps.compile"
       }
     }
 
