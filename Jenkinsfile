@@ -1,5 +1,7 @@
 pipeline {
-  agent any
+  agent {
+      docker { image 'FROM elixir:1.7.1-slim' }
+  }
 
   environment {
     SOME_VAR = "/home/deployer"
