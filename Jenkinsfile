@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage("Build") {
       steps {
-        bash '''#!/bin/bash
+        sh '''#!/bin/bash
           mix do deps.get, deps.compile
         '''
       }
