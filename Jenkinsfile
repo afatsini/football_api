@@ -8,9 +8,9 @@ pipeline {
   stages {
     stage("Build") {
       steps {
-        bash "mix local.hex --force"
-        bash "mix local.rebar"
-        bash "mix do deps.get, deps.compile"
+        sh "mix local.hex --force"
+        sh "mix local.rebar"
+        sh "mix do deps.get, deps.compile"
       }
     }
 
