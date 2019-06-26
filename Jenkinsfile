@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-    PATH=/var/jenkins_home/.asdf/shims:/var/jenkins_home/.asdf/bin:/usr/local/openjdk-8/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    PATH="/var/jenkins_home/.asdf/shims:/var/jenkins_home/.asdf/bin:/usr/local/openjdk-8/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
   }
 
   stages {
