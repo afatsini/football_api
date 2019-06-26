@@ -9,20 +9,14 @@ pipeline {
     stage("Build") {
       steps {
         sh '''#!/bin/bash
-          mix do deps.get, deps.compile
+          /var/jenkins_home/.asdf/shims/mix do deps.get, deps.compile
         '''
       }
     }
 
     stage("Test") {
       steps {
-        sh "mix test --cover"
-      }
-    }
-
-    stage("Credo"){
-      steps{
-        sh "mix credo --strict"
+        sh "/var/jenkins_home/.asdf/shims/mix test --cover"
       }
     }
   }
