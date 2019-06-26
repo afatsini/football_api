@@ -11,7 +11,7 @@ defmodule FootballApi.Mixfile do
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
-      test_coverage: [tool: ExCoveralls],
+      test_coverage: [tool: :covertool],
       preferred_cli_env: ["coveralls.json": :test]
     ]
   end
@@ -46,7 +46,8 @@ defmodule FootballApi.Mixfile do
       {:exprotobuf, "~> 1.2.9"},
       {:mock, "~> 0.3.0", only: :test},
       {:plug_logger_json, "~> 0.6.0"},
-      {:scrivener_list, "~> 1.0"}
+      {:scrivener_list, "~> 1.0"},
+      {:covertool, "~> 2.0"}
     ]
   end
 
