@@ -8,6 +8,7 @@ pipeline {
   stages {
     stage("Build") {
       steps {
+        sh "source /var/jenkins_home/.bashrc"
         sh "mix do deps.get, deps.compile"
       }
     }
